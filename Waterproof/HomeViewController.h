@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WPTableView.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    WPTableView *_tableView;
+    NSArray *_tableViewData;
+}
 
 @end
