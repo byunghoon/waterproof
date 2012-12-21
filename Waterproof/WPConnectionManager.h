@@ -8,10 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    DownloadType
-} DownloadType;
-
 @interface WPConnectionManager : NSObject
 
 + (id)instance;
