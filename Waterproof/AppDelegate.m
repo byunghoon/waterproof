@@ -20,23 +20,24 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     EventsViewController *eventsViewController = [[EventsViewController alloc] init];
-    eventsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbaricon"] tag:0];
     UINavigationController *firstNavigationController = [[UINavigationController alloc] initWithRootViewController:eventsViewController];
+    firstNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbaricon"] tag:0];
     
     AcademicViewController *academicViewController = [[AcademicViewController alloc] init];
-    academicViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Academic" image:[UIImage imageNamed:@"tabbaricon"] tag:1];
     UINavigationController *secondNavigationController = [[UINavigationController alloc] initWithRootViewController:academicViewController];
+    secondNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Academic" image:[UIImage imageNamed:@"tabbaricon"] tag:1];
     
     PlacesViewController *placesViewController = [[PlacesViewController alloc] init];
-    placesViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Places" image:[UIImage imageNamed:@"tabbaricon"] tag:2];
     UINavigationController *thirdNavigationController = [[UINavigationController alloc] initWithRootViewController:placesViewController];
+    thirdNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Places" image:[UIImage imageNamed:@"tabbaricon"] tag:2];
     
     SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
-    settingsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:[UIImage imageNamed:@"tabbaricon"] tag:3];
     UINavigationController *fourthNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+    fourthNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:[UIImage imageNamed:@"tabbaricon"] tag:3];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[firstNavigationController, secondNavigationController, thirdNavigationController, fourthNavigationController];
+    
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;

@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WPConnectionManager.h"
 
-@interface EventsViewController : UIViewController
+@interface EventsViewController : UIViewController <DownloadDelegate, UITableViewDelegate, UITableViewDataSource> {
+    UITableView *_tableView;
+    NSMutableArray *_eventsArray;
+    
+    UIActivityIndicatorView *_spinner;
+    
+    int activeConnections;
+}
 
 @end

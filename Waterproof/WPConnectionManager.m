@@ -7,8 +7,9 @@
 //
 
 #import "WPConnectionManager.h"
+#import "AFJSONRequestOperation.h"
 
-static NSString *WATERLOO_API_KEY = @"13d92fbc5c34ebeeea1daca01bac2f8e";
+static NSString *BASE_URL = @"http://api.uwaterloo.ca/public/v1/?key=13d92fbc5c34ebeeea1daca01bac2f8e&service=";
 
 @implementation WPConnectionManager
 
@@ -19,6 +20,37 @@ static NSString *WATERLOO_API_KEY = @"13d92fbc5c34ebeeea1daca01bac2f8e";
         sharedInstance = [[self alloc] init];
     });
     return sharedInstance;
+}
+
+- (void)download:(DownloadType)downloadType delegate:(id<DownloadDelegate>)delegate {
+    NSString *urlString;
+    switch (downloadType) {
+        case DownloadTypeDailyEvents: {
+            urlString = [BASE_URL stringByAppendingString:@"Events"];
+            break;
+        }
+        case DownloadTypeCalendarEvents: {
+            urlString = [BASE_URL stringByAppendingString:@"CalendarEvents"];
+            break;
+        }
+        case DownloadTypeUniversityHolidays: {
+            urlString = [BASE_URL stringByAppendingString:@"Holidays"];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [delegate downloadSucceeded:downloadType data:JSON];
+    } failure:^(NSURLRequest *request , NSHTTPURLResponse *response , NSError *error , id JSON) {
+        [delegate downloadFailed:downloadType];
+    }];
+    
+    [operation start];
 }
 
 @end
