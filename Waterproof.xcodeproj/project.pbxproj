@@ -16,11 +16,7 @@
 		44B2298F1683B53100E853E5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B2298E1683B53100E853E5 /* Default.png */; };
 		44B229911683B53100E853E5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B229901683B53100E853E5 /* Default@2x.png */; };
 		44B229931683B53100E853E5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B229921683B53100E853E5 /* Default-568h@2x.png */; };
-		44B229961683B53100E853E5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229951683B53100E853E5 /* MainViewController.m */; };
-		44B229991683B53100E853E5 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B229971683B53100E853E5 /* MainViewController.xib */; };
 		44B229A21683B7A300E853E5 /* WPTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229A11683B7A300E853E5 /* WPTableView.m */; };
-		44B229A51683B92A00E853E5 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229A41683B92A00E853E5 /* HomeViewController.m */; };
-		44B229A91683C67200E853E5 /* NewsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229A81683C67200E853E5 /* NewsListViewController.m */; };
 		44B229AC1683C87100E853E5 /* WPConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229AB1683C87100E853E5 /* WPConnectionManager.m */; };
 		44B229C21683CE2900E853E5 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229B01683CE2900E853E5 /* AFHTTPClient.m */; };
 		44B229C31683CE2900E853E5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229B21683CE2900E853E5 /* AFHTTPRequestOperation.m */; };
@@ -33,6 +29,12 @@
 		44B229CA1683CE2900E853E5 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229C11683CE2900E853E5 /* UIImageView+AFNetworking.m */; };
 		44B229CC1683CF4C00E853E5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B229CB1683CF4C00E853E5 /* SystemConfiguration.framework */; };
 		44B229CE1683CF5100E853E5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B229CD1683CF5000E853E5 /* MobileCoreServices.framework */; };
+		44BF35BF16856CC900EEAACD /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35BE16856CC900EEAACD /* EventsViewController.m */; };
+		44BF35C216856CE400EEAACD /* AcademicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35C116856CE400EEAACD /* AcademicViewController.m */; };
+		44BF35C516856CEE00EEAACD /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35C416856CEE00EEAACD /* PlacesViewController.m */; };
+		44BF35C816856CF800EEAACD /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35C716856CF800EEAACD /* SettingsViewController.m */; };
+		44BF35CC16856F6900EEAACD /* tabbaricon.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BF35CA16856F6900EEAACD /* tabbaricon.png */; };
+		44BF35CD16856F6900EEAACD /* tabbaricon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BF35CB16856F6900EEAACD /* tabbaricon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,15 +51,8 @@
 		44B2298E1683B53100E853E5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		44B229901683B53100E853E5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		44B229921683B53100E853E5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		44B229941683B53100E853E5 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		44B229951683B53100E853E5 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		44B229981683B53100E853E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainViewController.xib; sourceTree = "<group>"; };
 		44B229A01683B7A300E853E5 /* WPTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPTableView.h; sourceTree = "<group>"; };
 		44B229A11683B7A300E853E5 /* WPTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPTableView.m; sourceTree = "<group>"; };
-		44B229A31683B92A00E853E5 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		44B229A41683B92A00E853E5 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		44B229A71683C67200E853E5 /* NewsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListViewController.h; sourceTree = "<group>"; };
-		44B229A81683C67200E853E5 /* NewsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListViewController.m; sourceTree = "<group>"; };
 		44B229AA1683C87100E853E5 /* WPConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPConnectionManager.h; sourceTree = "<group>"; };
 		44B229AB1683C87100E853E5 /* WPConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPConnectionManager.m; sourceTree = "<group>"; };
 		44B229AF1683CE2900E853E5 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -81,6 +76,16 @@
 		44B229C11683CE2900E853E5 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		44B229CB1683CF4C00E853E5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		44B229CD1683CF5000E853E5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		44BF35BD16856CC900EEAACD /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
+		44BF35BE16856CC900EEAACD /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
+		44BF35C016856CE400EEAACD /* AcademicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcademicViewController.h; sourceTree = "<group>"; };
+		44BF35C116856CE400EEAACD /* AcademicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcademicViewController.m; sourceTree = "<group>"; };
+		44BF35C316856CEE00EEAACD /* PlacesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesViewController.h; sourceTree = "<group>"; };
+		44BF35C416856CEE00EEAACD /* PlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesViewController.m; sourceTree = "<group>"; };
+		44BF35C616856CF800EEAACD /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		44BF35C716856CF800EEAACD /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		44BF35CA16856F6900EEAACD /* tabbaricon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbaricon.png; sourceTree = "<group>"; };
+		44BF35CB16856F6900EEAACD /* tabbaricon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbaricon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,15 +138,11 @@
 			children = (
 				44B229AD1683CDDC00E853E5 /* External Sources */,
 				44B229831683B53100E853E5 /* Supporting Files */,
+				44BF35C916856F2C00EEAACD /* Assets */,
 				44B2299F1683B76900E853E5 /* WPClasses */,
+				44BF35BC16856BDB00EEAACD /* Components */,
 				44B2298B1683B53100E853E5 /* AppDelegate.h */,
 				44B2298C1683B53100E853E5 /* AppDelegate.m */,
-				44B229941683B53100E853E5 /* MainViewController.h */,
-				44B229951683B53100E853E5 /* MainViewController.m */,
-				44B229971683B53100E853E5 /* MainViewController.xib */,
-				44B229A31683B92A00E853E5 /* HomeViewController.h */,
-				44B229A41683B92A00E853E5 /* HomeViewController.m */,
-				44B229A61683C62500E853E5 /* Events */,
 			);
 			path = Waterproof;
 			sourceTree = "<group>";
@@ -169,15 +170,6 @@
 				44B229AB1683C87100E853E5 /* WPConnectionManager.m */,
 			);
 			name = WPClasses;
-			sourceTree = "<group>";
-		};
-		44B229A61683C62500E853E5 /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				44B229A71683C67200E853E5 /* NewsListViewController.h */,
-				44B229A81683C67200E853E5 /* NewsListViewController.m */,
-			);
-			name = Events;
 			sourceTree = "<group>";
 		};
 		44B229AD1683CDDC00E853E5 /* External Sources */ = {
@@ -212,6 +204,30 @@
 				44B229C11683CE2900E853E5 /* UIImageView+AFNetworking.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		44BF35BC16856BDB00EEAACD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				44BF35BD16856CC900EEAACD /* EventsViewController.h */,
+				44BF35BE16856CC900EEAACD /* EventsViewController.m */,
+				44BF35C016856CE400EEAACD /* AcademicViewController.h */,
+				44BF35C116856CE400EEAACD /* AcademicViewController.m */,
+				44BF35C316856CEE00EEAACD /* PlacesViewController.h */,
+				44BF35C416856CEE00EEAACD /* PlacesViewController.m */,
+				44BF35C616856CF800EEAACD /* SettingsViewController.h */,
+				44BF35C716856CF800EEAACD /* SettingsViewController.m */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		44BF35C916856F2C00EEAACD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				44BF35CA16856F6900EEAACD /* tabbaricon.png */,
+				44BF35CB16856F6900EEAACD /* tabbaricon@2x.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,7 +285,8 @@
 				44B2298F1683B53100E853E5 /* Default.png in Resources */,
 				44B229911683B53100E853E5 /* Default@2x.png in Resources */,
 				44B229931683B53100E853E5 /* Default-568h@2x.png in Resources */,
-				44B229991683B53100E853E5 /* MainViewController.xib in Resources */,
+				44BF35CC16856F6900EEAACD /* tabbaricon.png in Resources */,
+				44BF35CD16856F6900EEAACD /* tabbaricon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,10 +299,7 @@
 			files = (
 				44B229891683B53100E853E5 /* main.m in Sources */,
 				44B2298D1683B53100E853E5 /* AppDelegate.m in Sources */,
-				44B229961683B53100E853E5 /* MainViewController.m in Sources */,
 				44B229A21683B7A300E853E5 /* WPTableView.m in Sources */,
-				44B229A51683B92A00E853E5 /* HomeViewController.m in Sources */,
-				44B229A91683C67200E853E5 /* NewsListViewController.m in Sources */,
 				44B229AC1683C87100E853E5 /* WPConnectionManager.m in Sources */,
 				44B229C21683CE2900E853E5 /* AFHTTPClient.m in Sources */,
 				44B229C31683CE2900E853E5 /* AFHTTPRequestOperation.m in Sources */,
@@ -296,6 +310,10 @@
 				44B229C81683CE2900E853E5 /* AFURLConnectionOperation.m in Sources */,
 				44B229C91683CE2900E853E5 /* AFXMLRequestOperation.m in Sources */,
 				44B229CA1683CE2900E853E5 /* UIImageView+AFNetworking.m in Sources */,
+				44BF35BF16856CC900EEAACD /* EventsViewController.m in Sources */,
+				44BF35C216856CE400EEAACD /* AcademicViewController.m in Sources */,
+				44BF35C516856CEE00EEAACD /* PlacesViewController.m in Sources */,
+				44BF35C816856CF800EEAACD /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,14 +326,6 @@
 				44B229861683B53100E853E5 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		44B229971683B53100E853E5 /* MainViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				44B229981683B53100E853E5 /* en */,
-			);
-			name = MainViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -412,6 +422,7 @@
 				44B2299E1683B53100E853E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
