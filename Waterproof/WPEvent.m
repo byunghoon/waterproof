@@ -19,6 +19,7 @@
             event.name = [data objectForKey:@"Name"];
             event.date = [NSDate date];
             event.description = [data objectForKey:@"Description"];
+            event.links = [[data objectForKey:@"Links"] objectForKey:@"result"];
             break;
         }
         case DownloadTypeCalendarEvents: {

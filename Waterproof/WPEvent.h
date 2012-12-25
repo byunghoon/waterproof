@@ -21,7 +21,9 @@ typedef enum {
 @property (nonatomic) EventType eventType;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSString *links;
 @property (nonatomic, strong) NSString *description;
+
 
 @property (nonatomic, strong) NSString *venue;
 @property (nonatomic, strong) NSString *host;

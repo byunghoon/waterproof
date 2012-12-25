@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WPEvent.h"
 
-@interface EventDetailViewController : UIViewController
+@interface EventDetailViewController : UIViewController{
+ 
+    IBOutlet UILabel *titleOfEvent;
+    IBOutlet UILabel *dateOfEvent;
+    IBOutlet UITextView *descriptionOfEvent;
+    IBOutlet UITextView *linksOfEvent;
+    WPEvent *selectedEvent;
+}
+
+@property (nonatomic, retain) WPEvent *selectedEvent;
 
 @end

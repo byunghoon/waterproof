@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10340FE416867EE100DEE15C /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10340FE316867EE100DEE15C /* EventDetailViewController.m */; };
 		44B2297D1683B53100E853E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2297C1683B53100E853E5 /* UIKit.framework */; };
 		44B2297F1683B53100E853E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2297E1683B53100E853E5 /* Foundation.framework */; };
 		44B229811683B53100E853E5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B229801683B53100E853E5 /* CoreGraphics.framework */; };
@@ -39,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10340FE216867EE100DEE15C /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		10340FE316867EE100DEE15C /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		44B229781683B53100E853E5 /* Waterproof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waterproof.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44B2297C1683B53100E853E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		44B2297E1683B53100E853E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -216,6 +219,8 @@
 			children = (
 				44BF35BD16856CC900EEAACD /* EventsViewController.h */,
 				44BF35BE16856CC900EEAACD /* EventsViewController.m */,
+				10340FE216867EE100DEE15C /* EventDetailViewController.h */,
+				10340FE316867EE100DEE15C /* EventDetailViewController.m */,
 				44BF35C016856CE400EEAACD /* AcademicViewController.h */,
 				44BF35C116856CE400EEAACD /* AcademicViewController.m */,
 				44BF35C316856CEE00EEAACD /* PlacesViewController.h */,
@@ -320,6 +325,7 @@
 				44BF35C516856CEE00EEAACD /* PlacesViewController.m in Sources */,
 				44BF35C816856CF800EEAACD /* SettingsViewController.m in Sources */,
 				44BF35D0168576A600EEAACD /* WPEvent.m in Sources */,
+				10340FE416867EE100DEE15C /* EventDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,10 +396,12 @@
 		44B2299D1683B53100E853E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Waterproof/Waterproof-Prefix.pch";
 				INFOPLIST_FILE = "Waterproof/Waterproof-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -401,10 +409,12 @@
 		44B2299E1683B53100E853E5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Waterproof/Waterproof-Prefix.pch";
 				INFOPLIST_FILE = "Waterproof/Waterproof-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

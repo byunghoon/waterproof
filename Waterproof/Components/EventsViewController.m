@@ -7,6 +7,7 @@
 //
 
 #import "EventsViewController.h"
+#import "EventDetailViewController.h"
 #import "WPEvent.h"
 
 @interface EventsViewController ()
@@ -65,6 +66,18 @@
     
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    WPEvent *selectedEvent = [_eventsArray objectAtIndex:indexPath.row];
+    
+    EventDetailViewController *eventDetailView = [[EventDetailViewController alloc] initWithNibName:nil bundle:[NSBundle mainBundle]];
+    
+    eventDetailView.selectedEvent = selectedEvent;
+	[self.navigationController pushViewController:eventDetailView animated:YES];
+	eventDetailView = nil;
+
+    
+}
 
 
 #pragma mark - Helper
@@ -90,9 +103,15 @@
         [self reloadTable];
     } else if (downloadType == DownloadTypeCalendarEvents) {
         //Handle data
+        for (NSDictionary *result in resultArray) {
+            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeCalendar]];
+        }
         [self reloadTable];
     } else if (downloadType == DownloadTypeUniversityHolidays) {
         //Handle data
+        for (NSDictionary *result in resultArray) {
+            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeHoliday]];
+        }
         [self reloadTable];
     }
 }
