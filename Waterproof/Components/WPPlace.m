@@ -21,7 +21,7 @@
             place.imageURL = [data objectForKey:@"LargeThumb"];
             
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[[data objectForKey:@"Latitude"] floatValue] longitude:[[data objectForKey:@"Longitude"] floatValue]];
-            place.location = location;
+            place.geolocation = location;
             
             break;
         }
@@ -32,13 +32,15 @@
             
             place.placeType = PlaceTypeParking;
             place.name = [data objectForKey:@"Name"];
+            place.parkingType = [data objectForKey:@"Type"];
+            place.paymentType = [data objectForKey:@"PaymentType"];
             place.after4Cost = [data objectForKey:@"After4Cost"];
             place.hourlyCost = [data objectForKey:@"HourlyCost"];
             place.maxCost = [data objectForKey:@"MaxCost"];
             place.weekendCost = [data objectForKey:@"WeekendCost"];
             
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[lat floatValue] longitude:[lon floatValue]];
-            place.location = location;
+            place.geolocation = location;
             
             break;
         }
@@ -49,14 +51,14 @@
             place.placeType = PlaceTypeWatcardVendors;
             place.name = [data objectForKey:@"Name"];
             place.imageURL = [data objectForKey:@"Logo"];
-            place.address = [data objectForKey:@"Location"];
+            place.location = [data objectForKey:@"Location"];
             place.phoneNumber = [data objectForKey:@"Telephone"];
             
             NSRange commaPosition = [latlong rangeOfString:@","];
             NSString *lat = [latlong substringToIndex:commaPosition.location];
             NSString *lon = [latlong substringFromIndex:commaPosition.location+2];
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[lat floatValue] longitude:[lon floatValue]];
-            place.location = location;
+            place.geolocation = location;
             
             break;
         }

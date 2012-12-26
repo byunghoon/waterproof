@@ -21,7 +21,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *placeID;
 @property (nonatomic) PlaceType placeType;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) CLLocation *location;
+@property (nonatomic, strong) CLLocation *geolocation;
 @property (nonatomic, strong) NSString *imageURL;
 
 // Buildings
@@ -29,13 +29,15 @@ typedef enum {
 
 
 // Parking
+@property (nonatomic, strong) NSString *parkingType;
+@property (nonatomic, strong) NSString *paymentType;
 @property (nonatomic, strong) NSString *maxCost;
 @property (nonatomic, strong) NSString *weekendCost;
 @property (nonatomic, strong) NSString *after4Cost;
 @property (nonatomic, strong) NSString *hourlyCost;
 
 // Watcard Vendors
-@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *phoneNumber;
 
 + (WPPlace *)placeWithData:(id)data type:(DownloadType)downloadType;
