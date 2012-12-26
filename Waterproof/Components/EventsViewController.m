@@ -22,17 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    [self.view addSubview:_tableView];
-    
-    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _spinner.hidesWhenStopped = YES;
-    _spinner.center = _tableView.center;
-    [_spinner startAnimating];
-    [self.view addSubview:_spinner];
-    
     _eventsArray = [NSMutableArray array];
     
     activeConnections = 3;
@@ -44,30 +33,18 @@
 
 #pragma mark - UITableView
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1; //temp
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_eventsArray count];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CELL_IDENTIFIER = @"EventsTableViewCell";
+    UITableViewCell *cell = [self defaultTableViewCell];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
-    }
-    
-    WPEvent *event = [_eventsArray objectAtIndex:indexPath.row];
+    WPEvent *event = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.textLabel.text = event.name;
     
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    WPEvent *selectedEvent = [_eventsArray objectAtIndex:indexPath.row];
+    WPEvent *selectedEvent = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     EventDetailViewController *eventDetailViewController = [[EventDetailViewController alloc] init];
     eventDetailViewController.selectedEvent = selectedEvent;
@@ -80,7 +57,11 @@
 - (void)reloadTable {
     activeConnections --;
     if (activeConnections == 0) {
-        //sort data using date
+        //TODO: sort data using date
+        
+        [_tableViewHeaderString addObject:@"TODAY"];
+        [_tableViewData addObject:_eventsArray];
+        
         [_tableView reloadData];
         [_spinner stopAnimating];
     }

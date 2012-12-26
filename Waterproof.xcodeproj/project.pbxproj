@@ -12,6 +12,7 @@
 		44802111168AB4100008A865 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802110168AB4100008A865 /* SearchViewController.m */; };
 		44802114168AB4230008A865 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802113168AB4230008A865 /* PlacesViewController.m */; };
 		44802117168AB4330008A865 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802116168AB4330008A865 /* SettingsViewController.m */; };
+		4480211A168ABCE60008A865 /* WPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802119168ABCE50008A865 /* WPTableViewController.m */; };
 		44B2297D1683B53100E853E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2297C1683B53100E853E5 /* UIKit.framework */; };
 		44B2297F1683B53100E853E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2297E1683B53100E853E5 /* Foundation.framework */; };
 		44B229811683B53100E853E5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B229801683B53100E853E5 /* CoreGraphics.framework */; };
@@ -51,6 +52,8 @@
 		44802113168AB4230008A865 /* PlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesViewController.m; sourceTree = "<group>"; };
 		44802115168AB4330008A865 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		44802116168AB4330008A865 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		44802118168ABCE50008A865 /* WPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPTableViewController.h; sourceTree = "<group>"; };
+		44802119168ABCE50008A865 /* WPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPTableViewController.m; sourceTree = "<group>"; };
 		44B229781683B53100E853E5 /* Waterproof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waterproof.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44B2297C1683B53100E853E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		44B2297E1683B53100E853E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -178,6 +181,8 @@
 				44BF35CF168576A600EEAACD /* WPEvent.m */,
 				4480210C168AB3360008A865 /* WPBaseViewController.h */,
 				4480210D168AB3360008A865 /* WPBaseViewController.m */,
+				44802118168ABCE50008A865 /* WPTableViewController.h */,
+				44802119168ABCE50008A865 /* WPTableViewController.m */,
 			);
 			name = WPClasses;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				44802111168AB4100008A865 /* SearchViewController.m in Sources */,
 				44802114168AB4230008A865 /* PlacesViewController.m in Sources */,
 				44802117168AB4330008A865 /* SettingsViewController.m in Sources */,
+				4480211A168ABCE60008A865 /* WPTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

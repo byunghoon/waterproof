@@ -6,15 +6,11 @@
 //  Copyright (c) 2012 Kokkiri. All rights reserved.
 //
 
-#import "WPBaseViewController.h"
+#import "WPTableViewController.h"
 #import "WPConnectionManager.h"
 
-@interface EventsViewController : WPBaseViewController <DownloadDelegate, UITableViewDelegate, UITableViewDataSource> {
-    UITableView *_tableView;
+@interface EventsViewController : WPTableViewController <DownloadDelegate> {
     NSMutableArray *_eventsArray;
-    
-    UIActivityIndicatorView *_spinner;
-    
     int activeConnections;
 }
 
