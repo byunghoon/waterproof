@@ -37,6 +37,19 @@ static NSString *BASE_URL = @"http://api.uwaterloo.ca/public/v1/?key=13d92fbc5c3
             urlString = [BASE_URL stringByAppendingString:@"Holidays"];
             break;
         }
+            
+        case DownloadTypeBuildings: {
+            urlString = [BASE_URL stringByAppendingString:@"Buildings"];
+            break;
+        }
+        case DownloadTypeParking: {
+            urlString = [BASE_URL stringByAppendingString:@"ParkingList"];
+            break;
+        }
+        case DownloadTypeWatcardVendors: {
+            urlString = [BASE_URL stringByAppendingString:@"WatcardVendors"];
+            break;
+        }
         default:
             break;
     }

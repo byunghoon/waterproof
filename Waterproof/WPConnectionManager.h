@@ -22,15 +22,18 @@ typedef enum {
     DownloadTypeBuildings,
     DownloadTypeParking,
     DownloadTypeWatPark,
-    DownloadTypeWatcardVendorsList
+    DownloadTypeWatcardVendors
 } DownloadType;
+
 
 @protocol DownloadDelegate <NSObject>
 
+@optional
 - (void)downloadSucceeded:(DownloadType)downloadType data:(id)data;
 - (void)downloadFailed:(DownloadType)downloadType;
 
 @end
+
 
 @interface WPConnectionManager : NSObject
 

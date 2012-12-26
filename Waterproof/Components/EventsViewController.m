@@ -31,7 +31,7 @@
 }
 
 
-#pragma mark - UITableView
+#pragma mark - UITableView Delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self defaultTableViewCell];
@@ -79,15 +79,15 @@
         [self reloadTable];
     } else if (downloadType == DownloadTypeCalendarEvents) {
         //Handle data
-//        for (NSDictionary *result in resultArray) {
-//            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeCalendar]];
-//        }
+        for (NSDictionary *result in resultArray) {
+            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeCalendar]];
+        }
         [self reloadTable];
     } else if (downloadType == DownloadTypeUniversityHolidays) {
         //Handle data
-//        for (NSDictionary *result in resultArray) {
-//            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeHoliday]];
-//        }
+        for (NSDictionary *result in resultArray) {
+            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeHoliday]];
+        }
         [self reloadTable];
     }
 }

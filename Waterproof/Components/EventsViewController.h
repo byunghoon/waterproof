@@ -7,9 +7,8 @@
 //
 
 #import "WPTableViewController.h"
-#import "WPConnectionManager.h"
 
-@interface EventsViewController : WPTableViewController <DownloadDelegate> {
+@interface EventsViewController : WPTableViewController {
     NSMutableArray *_eventsArray;
     int activeConnections;
 }

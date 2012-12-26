@@ -7,8 +7,9 @@
 //
 
 #import "WPBaseViewController.h"
+#import "WPConnectionManager.h"
 
-@interface WPTableViewController : WPBaseViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface WPTableViewController : WPBaseViewController <DownloadDelegate, UITableViewDelegate, UITableViewDataSource> {
     UITableView *_tableView;
     NSMutableArray *_tableViewHeaderString;
     NSMutableArray *_tableViewData;
