@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.h
+//  SearchViewController.h
 //  Waterproof
 //
 //  Created by Byunghoon Yoon on 12-12-25.
@@ -8,6 +8,6 @@
 
 #import "WPBaseViewController.h"
 
-@interface SettingsViewController : WPBaseViewController
+@interface SearchViewController : WPBaseViewController
 
 @end

@@ -7,8 +7,9 @@
 //
 
 #import "EventsViewController.h"
-#import "EventDetailViewController.h"
+#import "Constants.h"
 #import "WPEvent.h"
+#import "EventDetailViewController.h"
 
 @interface EventsViewController ()
 
@@ -20,10 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Events";
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)];
-    //Table view frame is fixed temporarily. Need a better way to do this.
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
@@ -70,13 +69,9 @@
     
     WPEvent *selectedEvent = [_eventsArray objectAtIndex:indexPath.row];
     
-    EventDetailViewController *eventDetailView = [[EventDetailViewController alloc] initWithNibName:nil bundle:[NSBundle mainBundle]];
-    
-    eventDetailView.selectedEvent = selectedEvent;
-	[self.navigationController pushViewController:eventDetailView animated:YES];
-	eventDetailView = nil;
-
-    
+    EventDetailViewController *eventDetailViewController = [[EventDetailViewController alloc] init];
+    eventDetailViewController.selectedEvent = selectedEvent;
+	[self.navigationController pushViewController:eventDetailViewController animated:YES];
 }
 
 
@@ -103,15 +98,15 @@
         [self reloadTable];
     } else if (downloadType == DownloadTypeCalendarEvents) {
         //Handle data
-        for (NSDictionary *result in resultArray) {
-            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeCalendar]];
-        }
+//        for (NSDictionary *result in resultArray) {
+//            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeCalendar]];
+//        }
         [self reloadTable];
     } else if (downloadType == DownloadTypeUniversityHolidays) {
         //Handle data
-        for (NSDictionary *result in resultArray) {
-            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeHoliday]];
-        }
+//        for (NSDictionary *result in resultArray) {
+//            [_eventsArray addObject:[WPEvent eventWithData:result type:EventTypeHoliday]];
+//        }
         [self reloadTable];
     }
 }

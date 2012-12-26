@@ -1,8 +1,8 @@
 //
-//  SettingViewController.m
+//  SettingsViewController.m
 //  Waterproof
 //
-//  Created by Byunghoon Yoon on 12-12-21.
+//  Created by Byunghoon Yoon on 12-12-25.
 //  Copyright (c) 2012 Kokkiri. All rights reserved.
 //
 

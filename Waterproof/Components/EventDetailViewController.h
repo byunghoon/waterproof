@@ -6,18 +6,16 @@
 //  Copyright (c) 2012년 Kokkiri. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "WPBaseViewController.h"
 #import "WPEvent.h"
 
-@interface EventDetailViewController : UIViewController{
- 
-    IBOutlet UILabel *titleOfEvent;
-    IBOutlet UILabel *dateOfEvent;
-    IBOutlet UITextView *descriptionOfEvent;
-    IBOutlet UITextView *linksOfEvent;
-    WPEvent *selectedEvent;
+@interface EventDetailViewController : WPBaseViewController {
+    UILabel *titleOfEvent;
+    UILabel *dateOfEvent;
+    UITextView *descriptionOfEvent;
+    UITextView *linksOfEvent;
 }
 
-@property (nonatomic, retain) WPEvent *selectedEvent;
+@property (nonatomic, strong) WPEvent *selectedEvent;
 
 @end

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import "EventsViewController.h"
-#import "AcademicViewController.h"
+#import "SearchViewController.h"
 #import "PlacesViewController.h"
 #import "SettingsViewController.h"
 
@@ -19,14 +19,13 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    
     // Override point for customization after application launch.
     EventsViewController *eventsViewController = [[EventsViewController alloc] init];
     UINavigationController *firstNavigationController = [[UINavigationController alloc] initWithRootViewController:eventsViewController];
     firstNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbaricon"] tag:0];
     
-    AcademicViewController *academicViewController = [[AcademicViewController alloc] init];
-    UINavigationController *secondNavigationController = [[UINavigationController alloc] initWithRootViewController:academicViewController];
+    SearchViewController *searchViewController = [[SearchViewController alloc] init];
+    UINavigationController *secondNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
     secondNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Academic" image:[UIImage imageNamed:@"tabbaricon"] tag:1];
     
     PlacesViewController *placesViewController = [[PlacesViewController alloc] init];

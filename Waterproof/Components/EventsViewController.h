@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Kokkiri. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "WPBaseViewController.h"
 #import "WPConnectionManager.h"
 
-@interface EventsViewController : UIViewController <DownloadDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface EventsViewController : WPBaseViewController <DownloadDelegate, UITableViewDelegate, UITableViewDataSource> {
     UITableView *_tableView;
     NSMutableArray *_eventsArray;
     

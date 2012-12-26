@@ -7,49 +7,34 @@
 //
 
 #import "EventDetailViewController.h"
+#import "Constants.h"
+
+#define LABEL_MARGIN    10
 
 @interface EventDetailViewController ()
 
 @end
 
 @implementation EventDetailViewController
-@synthesize selectedEvent;
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    int margin = 10;
-    int titleHeight = 50;
-    
+	
     // Lable Set
     // - Title
-    titleOfEvent = [[UILabel alloc] initWithFrame:CGRectMake(margin, margin, self.view.frame.size.width - 2*margin, titleHeight)];
+    titleOfEvent = [[UILabel alloc] initWithFrame:CGRectMake(LABEL_MARGIN, LABEL_MARGIN, self.view.frame.size.width - 2*LABEL_MARGIN, 50)];
     titleOfEvent.backgroundColor = [UIColor orangeColor];
-    titleOfEvent.text = selectedEvent.name;
+    titleOfEvent.text = _selectedEvent.name;
     // - Description
-    descriptionOfEvent = [[UITextView alloc] initWithFrame:CGRectMake(margin, 70, self.view.frame.size.width - 2*margin, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height - 70 - 70)];
+    descriptionOfEvent = [[UITextView alloc] initWithFrame:CGRectMake(LABEL_MARGIN, 70, self.view.frame.size.width - 2*LABEL_MARGIN, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height - 70 - 70)];
     descriptionOfEvent.textColor = [UIColor blackColor];
     descriptionOfEvent.backgroundColor = [UIColor lightGrayColor];
-    descriptionOfEvent.text = selectedEvent.description;
+    descriptionOfEvent.text = _selectedEvent.description;
     // - Links
-    linksOfEvent = [[UITextView alloc] initWithFrame:CGRectMake(margin, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height - 70, self.view.frame.size.width - 2*margin, 50)];
+    linksOfEvent = [[UITextView alloc] initWithFrame:CGRectMake(LABEL_MARGIN, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height - 70, self.view.frame.size.width - 2*LABEL_MARGIN, 50)];
     linksOfEvent.editable = NO;
     linksOfEvent.backgroundColor = [UIColor yellowColor];
-    linksOfEvent.text = selectedEvent.links;
+    linksOfEvent.text = _selectedEvent.links;
     
     // View Setting
     self.view.backgroundColor = [UIColor whiteColor];
@@ -60,12 +45,5 @@
     // Title Setting
     self.navigationItem.title = @"TODAY";
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

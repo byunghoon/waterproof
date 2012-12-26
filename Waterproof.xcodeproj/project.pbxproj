@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		10340FE416867EE100DEE15C /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10340FE316867EE100DEE15C /* EventDetailViewController.m */; };
+		4480210E168AB3360008A865 /* WPBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4480210D168AB3360008A865 /* WPBaseViewController.m */; };
+		44802111168AB4100008A865 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802110168AB4100008A865 /* SearchViewController.m */; };
+		44802114168AB4230008A865 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802113168AB4230008A865 /* PlacesViewController.m */; };
+		44802117168AB4330008A865 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802116168AB4330008A865 /* SettingsViewController.m */; };
 		44B2297D1683B53100E853E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2297C1683B53100E853E5 /* UIKit.framework */; };
 		44B2297F1683B53100E853E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2297E1683B53100E853E5 /* Foundation.framework */; };
 		44B229811683B53100E853E5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B229801683B53100E853E5 /* CoreGraphics.framework */; };
@@ -17,7 +21,6 @@
 		44B2298F1683B53100E853E5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B2298E1683B53100E853E5 /* Default.png */; };
 		44B229911683B53100E853E5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B229901683B53100E853E5 /* Default@2x.png */; };
 		44B229931683B53100E853E5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B229921683B53100E853E5 /* Default-568h@2x.png */; };
-		44B229A21683B7A300E853E5 /* WPTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229A11683B7A300E853E5 /* WPTableView.m */; };
 		44B229AC1683C87100E853E5 /* WPConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229AB1683C87100E853E5 /* WPConnectionManager.m */; };
 		44B229C21683CE2900E853E5 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229B01683CE2900E853E5 /* AFHTTPClient.m */; };
 		44B229C31683CE2900E853E5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B229B21683CE2900E853E5 /* AFHTTPRequestOperation.m */; };
@@ -31,9 +34,6 @@
 		44B229CC1683CF4C00E853E5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B229CB1683CF4C00E853E5 /* SystemConfiguration.framework */; };
 		44B229CE1683CF5100E853E5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B229CD1683CF5000E853E5 /* MobileCoreServices.framework */; };
 		44BF35BF16856CC900EEAACD /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35BE16856CC900EEAACD /* EventsViewController.m */; };
-		44BF35C216856CE400EEAACD /* AcademicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35C116856CE400EEAACD /* AcademicViewController.m */; };
-		44BF35C516856CEE00EEAACD /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35C416856CEE00EEAACD /* PlacesViewController.m */; };
-		44BF35C816856CF800EEAACD /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35C716856CF800EEAACD /* SettingsViewController.m */; };
 		44BF35CC16856F6900EEAACD /* tabbaricon.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BF35CA16856F6900EEAACD /* tabbaricon.png */; };
 		44BF35CD16856F6900EEAACD /* tabbaricon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BF35CB16856F6900EEAACD /* tabbaricon@2x.png */; };
 		44BF35D0168576A600EEAACD /* WPEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BF35CF168576A600EEAACD /* WPEvent.m */; };
@@ -42,6 +42,15 @@
 /* Begin PBXFileReference section */
 		10340FE216867EE100DEE15C /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
 		10340FE316867EE100DEE15C /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		4480210A168AB0370008A865 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4480210C168AB3360008A865 /* WPBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPBaseViewController.h; sourceTree = "<group>"; };
+		4480210D168AB3360008A865 /* WPBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPBaseViewController.m; sourceTree = "<group>"; };
+		4480210F168AB4100008A865 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		44802110168AB4100008A865 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		44802112168AB4220008A865 /* PlacesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesViewController.h; sourceTree = "<group>"; };
+		44802113168AB4230008A865 /* PlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesViewController.m; sourceTree = "<group>"; };
+		44802115168AB4330008A865 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		44802116168AB4330008A865 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		44B229781683B53100E853E5 /* Waterproof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waterproof.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44B2297C1683B53100E853E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		44B2297E1683B53100E853E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -55,8 +64,6 @@
 		44B2298E1683B53100E853E5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		44B229901683B53100E853E5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		44B229921683B53100E853E5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		44B229A01683B7A300E853E5 /* WPTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPTableView.h; sourceTree = "<group>"; };
-		44B229A11683B7A300E853E5 /* WPTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPTableView.m; sourceTree = "<group>"; };
 		44B229AA1683C87100E853E5 /* WPConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPConnectionManager.h; sourceTree = "<group>"; };
 		44B229AB1683C87100E853E5 /* WPConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPConnectionManager.m; sourceTree = "<group>"; };
 		44B229AF1683CE2900E853E5 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -82,12 +89,6 @@
 		44B229CD1683CF5000E853E5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		44BF35BD16856CC900EEAACD /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
 		44BF35BE16856CC900EEAACD /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
-		44BF35C016856CE400EEAACD /* AcademicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcademicViewController.h; sourceTree = "<group>"; };
-		44BF35C116856CE400EEAACD /* AcademicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcademicViewController.m; sourceTree = "<group>"; };
-		44BF35C316856CEE00EEAACD /* PlacesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesViewController.h; sourceTree = "<group>"; };
-		44BF35C416856CEE00EEAACD /* PlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesViewController.m; sourceTree = "<group>"; };
-		44BF35C616856CF800EEAACD /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		44BF35C716856CF800EEAACD /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		44BF35CA16856F6900EEAACD /* tabbaricon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbaricon.png; sourceTree = "<group>"; };
 		44BF35CB16856F6900EEAACD /* tabbaricon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbaricon@2x.png"; sourceTree = "<group>"; };
 		44BF35CE168576A600EEAACD /* WPEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPEvent.h; sourceTree = "<group>"; };
@@ -170,12 +171,13 @@
 		44B2299F1683B76900E853E5 /* WPClasses */ = {
 			isa = PBXGroup;
 			children = (
-				44B229A01683B7A300E853E5 /* WPTableView.h */,
-				44B229A11683B7A300E853E5 /* WPTableView.m */,
+				4480210A168AB0370008A865 /* Constants.h */,
 				44B229AA1683C87100E853E5 /* WPConnectionManager.h */,
 				44B229AB1683C87100E853E5 /* WPConnectionManager.m */,
 				44BF35CE168576A600EEAACD /* WPEvent.h */,
 				44BF35CF168576A600EEAACD /* WPEvent.m */,
+				4480210C168AB3360008A865 /* WPBaseViewController.h */,
+				4480210D168AB3360008A865 /* WPBaseViewController.m */,
 			);
 			name = WPClasses;
 			sourceTree = "<group>";
@@ -221,12 +223,12 @@
 				44BF35BE16856CC900EEAACD /* EventsViewController.m */,
 				10340FE216867EE100DEE15C /* EventDetailViewController.h */,
 				10340FE316867EE100DEE15C /* EventDetailViewController.m */,
-				44BF35C016856CE400EEAACD /* AcademicViewController.h */,
-				44BF35C116856CE400EEAACD /* AcademicViewController.m */,
-				44BF35C316856CEE00EEAACD /* PlacesViewController.h */,
-				44BF35C416856CEE00EEAACD /* PlacesViewController.m */,
-				44BF35C616856CF800EEAACD /* SettingsViewController.h */,
-				44BF35C716856CF800EEAACD /* SettingsViewController.m */,
+				4480210F168AB4100008A865 /* SearchViewController.h */,
+				44802110168AB4100008A865 /* SearchViewController.m */,
+				44802112168AB4220008A865 /* PlacesViewController.h */,
+				44802113168AB4230008A865 /* PlacesViewController.m */,
+				44802115168AB4330008A865 /* SettingsViewController.h */,
+				44802116168AB4330008A865 /* SettingsViewController.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -309,7 +311,6 @@
 			files = (
 				44B229891683B53100E853E5 /* main.m in Sources */,
 				44B2298D1683B53100E853E5 /* AppDelegate.m in Sources */,
-				44B229A21683B7A300E853E5 /* WPTableView.m in Sources */,
 				44B229AC1683C87100E853E5 /* WPConnectionManager.m in Sources */,
 				44B229C21683CE2900E853E5 /* AFHTTPClient.m in Sources */,
 				44B229C31683CE2900E853E5 /* AFHTTPRequestOperation.m in Sources */,
@@ -321,11 +322,12 @@
 				44B229C91683CE2900E853E5 /* AFXMLRequestOperation.m in Sources */,
 				44B229CA1683CE2900E853E5 /* UIImageView+AFNetworking.m in Sources */,
 				44BF35BF16856CC900EEAACD /* EventsViewController.m in Sources */,
-				44BF35C216856CE400EEAACD /* AcademicViewController.m in Sources */,
-				44BF35C516856CEE00EEAACD /* PlacesViewController.m in Sources */,
-				44BF35C816856CF800EEAACD /* SettingsViewController.m in Sources */,
 				44BF35D0168576A600EEAACD /* WPEvent.m in Sources */,
 				10340FE416867EE100DEE15C /* EventDetailViewController.m in Sources */,
+				4480210E168AB3360008A865 /* WPBaseViewController.m in Sources */,
+				44802111168AB4100008A865 /* SearchViewController.m in Sources */,
+				44802114168AB4230008A865 /* PlacesViewController.m in Sources */,
+				44802117168AB4330008A865 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
