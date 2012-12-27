@@ -68,7 +68,17 @@
             place.name = [data objectForKey:@"Name"];
             place.imageURL = [data objectForKey:@"Logo"];
             place.location = [data objectForKey:@"Location"];
-            place.phoneNumber = [data objectForKey:@"Telephone"];
+            
+            NSString *phoneNumber = [data objectForKey:@"Telephone"];
+            NSRange open = [phoneNumber rangeOfString:@"("];
+            NSRange close = [phoneNumber rangeOfString:@")"];
+            if (open.location != NSNotFound && close.location != NSNotFound) {
+                NSString *areaCode = [[phoneNumber substringToIndex:close.location] substringFromIndex:open.location+1];
+                NSString *sevenDigit = [phoneNumber substringFromIndex:close.location+1];
+                place.phoneNumber = [NSString stringWithFormat:@"%@%@", areaCode, sevenDigit];
+            } else {
+                place.phoneNumber = phoneNumber;
+            }
             
             NSRange commaPosition = [latlong rangeOfString:@","];
             NSString *lat = [latlong substringToIndex:commaPosition.location];

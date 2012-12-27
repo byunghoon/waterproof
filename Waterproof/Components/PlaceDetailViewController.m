@@ -39,7 +39,7 @@
     }
     
     NSString *urlString = [NSString stringWithFormat:@"https://maps.google.ca/maps?q=%f,%f", _place.geolocation.coordinate.latitude, _place.geolocation.coordinate.longitude];
-    UIWebView *mapView = [[UIWebView alloc] initWithFrame:CGRectMake(0, maxY+WP_MARGIN_L, self.view.frame.size.width, self.view.frame.size.height-(maxY+WP_MARGIN_L))];
+    UIWebView *mapView = [[UIWebView alloc] initWithFrame:CGRectMake(0, maxY+WP_MARGIN_M, self.view.frame.size.width, self.view.frame.size.height-(maxY+WP_MARGIN_M))];
     [mapView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     [self.view addSubview:mapView];
 }
@@ -122,13 +122,15 @@
 - (float)drawVendorDetails {
     float cumulativeMaxY = LABEL_HEIGHT+(2*WP_MARGIN_M);
     
-    // Phone Number Label
+    // Phone Number TextView
     if (_place.phoneNumber) {
-        UILabel *phoneNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(WP_MARGIN_M, cumulativeMaxY, self.view.frame.size.width-(2*WP_MARGIN_M), LABEL_HEIGHT)];
-        phoneNumberLabel.backgroundColor = [UIColor clearColor];
-        phoneNumberLabel.text = _place.phoneNumber;
-        [self.view addSubview:phoneNumberLabel];
-        cumulativeMaxY = (cumulativeMaxY > CGRectGetMaxY(phoneNumberLabel.frame)) ? cumulativeMaxY : CGRectGetMaxY(phoneNumberLabel.frame);
+        UITextView *phoneNumberView = [[UITextView alloc] initWithFrame:CGRectMake(WP_MARGIN_M, cumulativeMaxY, self.view.frame.size.width-(2*WP_MARGIN_M), LABEL_HEIGHT)];
+        phoneNumberView.text = _place.phoneNumber;
+        phoneNumberView.backgroundColor = [UIColor clearColor];
+        phoneNumberView.editable = NO;
+        phoneNumberView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
+        [self.view addSubview:phoneNumberView];
+        cumulativeMaxY = (cumulativeMaxY > CGRectGetMaxY(phoneNumberView.frame)) ? cumulativeMaxY : CGRectGetMaxY(phoneNumberView.frame);
     }
     
     // Logo ImageView
