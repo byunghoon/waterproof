@@ -10,6 +10,7 @@
 
 @interface WatParkViewController : WPTableViewController {
     int cellHeight;
+    BOOL downloadInProgress;
 }
 
 @end

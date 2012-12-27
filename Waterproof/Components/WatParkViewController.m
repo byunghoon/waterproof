@@ -27,7 +27,33 @@
     
     _tableView.bounces = NO;
     
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshTableView)];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+
     [[WPConnectionManager instance] download:DownloadTypeWatPark delegate:self];
+    [self setDownloadInProgress:YES];
+}
+
+
+#pragma mark - Helper
+
+- (void)refreshTableView {
+    if (!downloadInProgress) {
+        [[WPConnectionManager instance] download:DownloadTypeWatPark delegate:self];
+        downloadInProgress = YES;
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    }
+}
+
+- (void)setDownloadInProgress:(BOOL)value {
+    downloadInProgress = value;
+    [self.navigationItem.rightBarButtonItem setEnabled:!value];
+    if (value) {
+        [_spinner startAnimating];
+    } else {
+        [_spinner stopAnimating];
+    }
+    
 }
 
 
@@ -104,7 +130,8 @@
     lotLabel.text = [data objectForKey:@"LotName"];
     
     // Percentage View
-    int newWidth = percentageView.frame.size.width * [[data objectForKey:@"PercentFilled"] intValue] / 100;
+    int percentageFullWidth = self.view.frame.size.width - CGRectGetMaxX(lotLabel.frame) - WP_MARGIN_M;
+    int newWidth = percentageFullWidth * [[data objectForKey:@"PercentFilled"] intValue] / 100;
     percentageView.frame = CGRectMake(percentageView.frame.origin.x, percentageView.frame.origin.y, 0, percentageView.frame.size.height);
     [UIView animateWithDuration:1.0 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         percentageView.frame = CGRectMake(percentageView.frame.origin.x, percentageView.frame.origin.y, newWidth, percentageView.frame.size.height);
@@ -146,11 +173,11 @@
     cellHeight = self.view.frame.size.height / [_tableViewData count];
     
     [_tableView reloadData];
-    [_spinner stopAnimating];
+    [self setDownloadInProgress:NO];
 }
 
 - (void)downloadFailed:(DownloadType)downloadType {
-    [_spinner stopAnimating];
+    [self setDownloadInProgress:YES];
 }
 
 @end
