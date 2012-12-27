@@ -18,6 +18,7 @@
 		44802127168ACD7C0008A865 /* WPEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802126168ACD7C0008A865 /* WPEvent.m */; };
 		44802129168ADE3D0008A865 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44802128168ADE3D0008A865 /* CoreLocation.framework */; };
 		4480212C168BB4E40008A865 /* PlaceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4480212B168BB4E40008A865 /* PlaceDetailViewController.m */; };
+		4480212F168BE7EA0008A865 /* WatParkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4480212E168BE7EA0008A865 /* WatParkViewController.m */; };
 		44B2297D1683B53100E853E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2297C1683B53100E853E5 /* UIKit.framework */; };
 		44B2297F1683B53100E853E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2297E1683B53100E853E5 /* Foundation.framework */; };
 		44B229811683B53100E853E5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B229801683B53100E853E5 /* CoreGraphics.framework */; };
@@ -67,6 +68,8 @@
 		44802128168ADE3D0008A865 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4480212A168BB4E40008A865 /* PlaceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceDetailViewController.h; sourceTree = "<group>"; };
 		4480212B168BB4E40008A865 /* PlaceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceDetailViewController.m; sourceTree = "<group>"; };
+		4480212D168BE7EA0008A865 /* WatParkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatParkViewController.h; sourceTree = "<group>"; };
+		4480212E168BE7EA0008A865 /* WatParkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatParkViewController.m; sourceTree = "<group>"; };
 		44B229781683B53100E853E5 /* Waterproof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waterproof.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44B2297C1683B53100E853E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		44B2297E1683B53100E853E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -137,6 +140,8 @@
 				4480212B168BB4E40008A865 /* PlaceDetailViewController.m */,
 				44802122168ACD4F0008A865 /* WPPlace.h */,
 				44802123168ACD4F0008A865 /* WPPlace.m */,
+				4480212D168BE7EA0008A865 /* WatParkViewController.h */,
+				4480212E168BE7EA0008A865 /* WatParkViewController.m */,
 			);
 			name = Places;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 				44802124168ACD4F0008A865 /* WPPlace.m in Sources */,
 				44802127168ACD7C0008A865 /* WPEvent.m in Sources */,
 				4480212C168BB4E40008A865 /* PlaceDetailViewController.m in Sources */,
+				4480212F168BE7EA0008A865 /* WatParkViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

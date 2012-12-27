@@ -21,4 +21,19 @@
 // Other
 #define IS_FOUR_INCH        [[UIScreen mainScreen] applicationFrame].size.height>500?YES:NO
 
+// Text Alignment
+#ifdef __IPHONE_6_0 // iOS6 and later
+#   define kLabelAlignmentCenter    NSTextAlignmentCenter
+#   define kLabelAlignmentLeft      NSTextAlignmentLeft
+#   define kLabelAlignmentRight     NSTextAlignmentRight
+#   define kLabelTruncationTail     NSLineBreakByTruncatingTail
+#   define kLabelTruncationMiddle   NSLineBreakByTruncatingMiddle
+#else // older versions
+#   define kLabelAlignmentCenter    UITextAlignmentCenter
+#   define kLabelAlignmentLeft      UITextAlignmentLeft
+#   define kLabelAlignmentRight     UITextAlignmentRight
+#   define kLabelTruncationTail     UILineBreakModeTailTruncation
+#   define kLabelTruncationMiddle   UILineBreakModeMiddleTruncation
+#endif
+
 #endif

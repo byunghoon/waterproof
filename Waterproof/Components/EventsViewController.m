@@ -25,9 +25,10 @@
     _eventsArray = [NSMutableArray array];
     
     activeConnections = 3;
-    [[WPConnectionManager instance] download:DownloadTypeDailyEvents delegate:self];
-    [[WPConnectionManager instance] download:DownloadTypeCalendarEvents delegate:self];
-    [[WPConnectionManager instance] download:DownloadTypeUniversityHolidays delegate:self];
+    // Disabled for less server hit count
+//    [[WPConnectionManager instance] download:DownloadTypeDailyEvents delegate:self];
+//    [[WPConnectionManager instance] download:DownloadTypeCalendarEvents delegate:self];
+//    [[WPConnectionManager instance] download:DownloadTypeUniversityHolidays delegate:self];
 }
 
 

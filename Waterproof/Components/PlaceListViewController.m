@@ -138,7 +138,7 @@
 }
 
 - (void)downloadFailed:(DownloadType)downloadType {
-    //TODO: handle failure
+    [_spinner stopAnimating];
 }
 
 @end

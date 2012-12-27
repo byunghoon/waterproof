@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "WPPlace.h"
 #import "PlaceListViewController.h"
+#import "WatParkViewController.h"
 
 #define BUTTON_SIZE 157.0
 
@@ -83,7 +84,8 @@
 }
 
 - (void)watparkButtonPressed {
-    
+    WatParkViewController *watParkViewController = [[WatParkViewController alloc ] init];
+    [self.navigationController pushViewController:watParkViewController animated:YES];
 }
 
 - (void)vendorsButtonPressed {
