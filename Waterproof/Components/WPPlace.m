@@ -32,12 +32,28 @@
             
             place.placeType = PlaceTypeParking;
             place.name = [data objectForKey:@"Name"];
-            place.parkingType = [data objectForKey:@"Type"];
             place.paymentType = [data objectForKey:@"PaymentType"];
             place.after4Cost = [data objectForKey:@"After4Cost"];
             place.hourlyCost = [data objectForKey:@"HourlyCost"];
             place.maxCost = [data objectForKey:@"MaxCost"];
             place.weekendCost = [data objectForKey:@"WeekendCost"];
+            
+            NSString *parkingType = [data objectForKey:@"Type"];
+            if ([parkingType isEqualToString:@"Visitor"]) {
+                place.parkingType = ParkingTypeVisitor;
+            } else if ([parkingType isEqualToString:@"FacultyAndStaff"]) {
+                place.parkingType = ParkingTypeFacultyAndStaff;
+            } else if ([parkingType isEqualToString:@"StudentPermit"]) {
+                place.parkingType = ParkingTypeStudentPermit;
+            } else if ([parkingType isEqualToString:@"Resident"]) {
+                place.parkingType = ParkingTypeResident;
+            } else if ([parkingType isEqualToString:@"ShortTerm"]) {
+                place.parkingType = ParkingTypeShortTerm;
+            } else if ([parkingType isEqualToString:@"Meter"]) {
+                place.parkingType = ParkingTypeMeter;
+            } else {
+                place.parkingType = ParkingTypeOther;
+            }
             
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[lat floatValue] longitude:[lon floatValue]];
             place.geolocation = location;

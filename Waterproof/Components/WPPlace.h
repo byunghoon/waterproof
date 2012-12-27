@@ -16,20 +16,29 @@ typedef enum {
     PlaceTypeWatcardVendors
 } PlaceType;
 
+typedef enum {
+    ParkingTypeVisitor,
+    ParkingTypeFacultyAndStaff,
+    ParkingTypeStudentPermit,
+    ParkingTypeResident,
+    ParkingTypeShortTerm,
+    ParkingTypeMeter,
+    ParkingTypeOther
+} ParkingType;
+
 @interface WPPlace : NSObject
 
 @property (nonatomic, strong) NSString *placeID;
 @property (nonatomic) PlaceType placeType;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) CLLocation *geolocation;
-@property (nonatomic, strong) NSString *imageURL;
 
 // Buildings
 @property (nonatomic, strong) NSString *acronym;
 
 
 // Parking
-@property (nonatomic, strong) NSString *parkingType;
+@property (nonatomic) ParkingType parkingType;
 @property (nonatomic, strong) NSString *paymentType;
 @property (nonatomic, strong) NSString *maxCost;
 @property (nonatomic, strong) NSString *weekendCost;
@@ -37,6 +46,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *hourlyCost;
 
 // Watcard Vendors
+@property (nonatomic, strong) NSString *imageURL;
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *phoneNumber;
 

@@ -7,6 +7,7 @@
 //
 
 #import "PlaceListViewController.h"
+#import "PlaceDetailViewController.h"
 
 @interface PlaceListViewController ()
 
@@ -47,7 +48,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    PlaceDetailViewController *placeDetailViewController = [[PlaceDetailViewController alloc] init];
+    placeDetailViewController.place = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:placeDetailViewController animated:YES];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
@@ -78,15 +83,17 @@
         // insert place objects
         for (int i=0; i<[resultArray count]; i++) {
             WPPlace *place = [WPPlace placeWithData:[resultArray objectAtIndex:i] type:downloadType];
-            if (place.name && place.parkingType) {
-                if ([place.parkingType isEqualToString:@"Visitor"]) {
+            if (place.name) {
+                if (place.parkingType == ParkingTypeVisitor) {
                     [[_tableViewData objectAtIndex:0] addObject:place];
-                } else if ([place.parkingType isEqualToString:@"StudentPermit"]) {
+                } else if (place.parkingType == ParkingTypeStudentPermit) {
                     [[_tableViewData objectAtIndex:1] addObject:place];
-                } else if ([place.parkingType isEqualToString:@"FacultyAndStaff"]) {
+                } else if (place.parkingType == ParkingTypeFacultyAndStaff) {
                     [[_tableViewData objectAtIndex:2] addObject:place];
-                } else if ([place.parkingType isEqualToString:@"Resident"]) {
+                } else if (place.parkingType == ParkingTypeResident) {
                     [[_tableViewData objectAtIndex:3] addObject:place];
+                } else {
+                    // Disregard short term and meter parking lots for now.
                 }
             }
         }
