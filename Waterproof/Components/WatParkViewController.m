@@ -32,6 +32,7 @@
 
     [[WPConnectionManager instance] download:DownloadTypeWatPark delegate:self];
     [self setDownloadInProgress:YES];
+    _tableView.sectionHeaderHeight = 0.0;
 }
 
 
