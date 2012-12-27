@@ -20,6 +20,7 @@
 
 // Other
 #define IS_FOUR_INCH        [[UIScreen mainScreen] applicationFrame].size.height>500?YES:NO
+#define BUTTON_SIZE 157.0
 
 // Text Alignment
 #ifdef __IPHONE_6_0 // iOS6 and later

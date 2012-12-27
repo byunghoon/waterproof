@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		10340FE416867EE100DEE15C /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10340FE316867EE100DEE15C /* EventDetailViewController.m */; };
+		105E692C168C062F0008FD1E /* SearchMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105E692B168C062F0008FD1E /* SearchMainViewController.m */; };
+		105E6930168C1AF70008FD1E /* WPCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 105E692F168C1AF70008FD1E /* WPCourse.m */; };
 		4480210E168AB3360008A865 /* WPBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4480210D168AB3360008A865 /* WPBaseViewController.m */; };
 		44802111168AB4100008A865 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802110168AB4100008A865 /* SearchViewController.m */; };
 		44802114168AB4230008A865 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802113168AB4230008A865 /* PlacesViewController.m */; };
@@ -48,6 +50,10 @@
 /* Begin PBXFileReference section */
 		10340FE216867EE100DEE15C /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
 		10340FE316867EE100DEE15C /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		105E692A168C062F0008FD1E /* SearchMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMainViewController.h; sourceTree = "<group>"; };
+		105E692B168C062F0008FD1E /* SearchMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMainViewController.m; sourceTree = "<group>"; };
+		105E692E168C1AF70008FD1E /* WPCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCourse.h; sourceTree = "<group>"; };
+		105E692F168C1AF70008FD1E /* WPCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCourse.m; sourceTree = "<group>"; };
 		4480210A168AB0370008A865 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		4480210C168AB3360008A865 /* WPBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPBaseViewController.h; sourceTree = "<group>"; };
 		4480210D168AB3360008A865 /* WPBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPBaseViewController.m; sourceTree = "<group>"; };
@@ -164,6 +170,10 @@
 			children = (
 				4480210F168AB4100008A865 /* SearchViewController.h */,
 				44802110168AB4100008A865 /* SearchViewController.m */,
+				105E692A168C062F0008FD1E /* SearchMainViewController.h */,
+				105E692B168C062F0008FD1E /* SearchMainViewController.m */,
+				105E692E168C1AF70008FD1E /* WPCourse.h */,
+				105E692F168C1AF70008FD1E /* WPCourse.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -394,6 +404,8 @@
 				44802127168ACD7C0008A865 /* WPEvent.m in Sources */,
 				4480212C168BB4E40008A865 /* PlaceDetailViewController.m in Sources */,
 				4480212F168BE7EA0008A865 /* WatParkViewController.m in Sources */,
+				105E692C168C062F0008FD1E /* SearchMainViewController.m in Sources */,
+				105E6930168C1AF70008FD1E /* WPCourse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

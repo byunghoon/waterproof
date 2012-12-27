@@ -12,8 +12,6 @@
 #import "PlaceListViewController.h"
 #import "WatParkViewController.h"
 
-#define BUTTON_SIZE 157.0
-
 @interface PlacesViewController ()
 
 @end

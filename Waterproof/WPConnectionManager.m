@@ -70,4 +70,29 @@ static NSString *BASE_URL = @"http://api.uwaterloo.ca/public/v1/?key=13d92fbc5c3
     [operation start];
 }
 
+
+// Search Manager
+- (void)search:(DownloadType)downloadType delegate:(id<DownloadDelegate>)delegate query:(NSString*)query {
+    NSString *urlString;
+    switch (downloadType) {
+        case DownloadTypeCourseSearch: {
+            urlString = [[BASE_URL stringByAppendingString:@"courseSearch&q="] stringByAppendingString:query];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [delegate downloadSucceeded:downloadType data:JSON];
+    } failure:^(NSURLRequest *request , NSHTTPURLResponse *response , NSError *error , id JSON) {
+        [delegate downloadFailed:downloadType];
+    }];
+    
+    [operation start];
+}
+
 @end

@@ -39,5 +39,6 @@ typedef enum {
 
 + (id)instance;
 - (void)download:(DownloadType)downloadType delegate:(id<DownloadDelegate>)delegate;
+- (void)search:(DownloadType)downloadType delegate:(id<DownloadDelegate>)delegate query:(NSString*)query;
 
 @end
