@@ -117,7 +117,8 @@
 
 - (void)downloadSucceeded:(DownloadType)downloadType data:(id)data {
     NSArray *resultArray = [[[data objectForKey:@"response"] objectForKey:@"data"] objectForKey:@"result"];
-
+        
+        
     //clear table
     [_courseArray removeAllObjects];
     if([resultArray count] == 0) {
@@ -127,29 +128,16 @@
         [_courseArray addObject:notFound];
     }
     
-    if(downloadType == DownloadTypeCourseSearch) {
+    if ([resultArray isKindOfClass:[NSDictionary class]]) {
+        _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
+        WPSearch *search = [WPSearch searchWithData:resultArray type:downloadType];
+        [_courseArray addObject:search];
+    } else {
+    
         for(NSDictionary *result in resultArray) {
             _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
-            WPSearch *course = [WPSearch searchWithData:result type:downloadType];
-            [_courseArray addObject:course];
-        }
-    } else if(downloadType == DownloadTypeProfessorSearch) {
-        for(NSDictionary *result in resultArray) {
-            _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
-            WPSearch *course = [WPSearch searchWithData:result type:downloadType];
-            [_courseArray addObject:course];
-        }
-    } else if(downloadType == DownloadTypeCourseSchedule) {
-        for(NSDictionary *result in resultArray) {
-            _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
-            WPSearch *course = [WPSearch searchWithData:result type:downloadType];
-            [_courseArray addObject:course];
-        }
-    } else if(downloadType == DownloadTypeExamSchedule) {
-        for(NSDictionary *result in resultArray) {
-            _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
-            WPSearch *course = [WPSearch searchWithData:result type:downloadType];
-            [_courseArray addObject:course];
+            WPSearch *search = [WPSearch searchWithData:result type:downloadType];
+            [_courseArray addObject:search];
         }
     }
     
