@@ -50,7 +50,7 @@
     professorsButton.backgroundColor = WP_YELLOW;
     [professorsButton setTitle:@"Professors" forState:UIControlStateNormal];
     [professorsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    //[professorsButton addTarget:self action:@selector(parkingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [professorsButton addTarget:self action:@selector(profButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:professorsButton];
     
     UIButton *courseScheduleButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -58,7 +58,7 @@
     courseScheduleButton.backgroundColor = WP_YELLOW;
     [courseScheduleButton setTitle:@"Course Schedule" forState:UIControlStateNormal];
     [courseScheduleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    //[courseScheduleButton addTarget:self action:@selector(watparkButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [courseScheduleButton addTarget:self action:@selector(courseScheduleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:courseScheduleButton];
     
     UIButton *examButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -66,7 +66,7 @@
     examButton.backgroundColor = WP_YELLOW;
     [examButton setTitle:@"Exam Schedule" forState:UIControlStateNormal];
     [examButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    //[examButton addTarget:self action:@selector(vendorsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [examButton addTarget:self action:@selector(examButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:examButton];
 }
 
@@ -76,22 +76,23 @@
     searchMainViewController.downloadType = DownloadTypeCourseSearch;
     [self.navigationController pushViewController:searchMainViewController animated:YES];
 }
-/*
-- (void)parkingButtonPressed {
-    PlaceListViewController *placeListViewController = [[PlaceListViewController alloc] init];
-    placeListViewController.downloadType = DownloadTypeParking;
-    [self.navigationController pushViewController:placeListViewController animated:YES];
+
+- (void)profButtonPressed {
+    SearchMainViewController *searchMainViewController = [[SearchMainViewController alloc] init];
+    searchMainViewController.downloadType = DownloadTypeProfessorSearch;
+    [self.navigationController pushViewController:searchMainViewController animated:YES];
 }
 
-- (void)watparkButtonPressed {
-    WatParkViewController *watParkViewController = [[WatParkViewController alloc ] init];
-    [self.navigationController pushViewController:watParkViewController animated:YES];
+- (void)courseScheduleButtonPressed {
+    SearchMainViewController *searchMainViewController = [[SearchMainViewController alloc] init];
+    searchMainViewController.downloadType = DownloadTypeCourseSchedule;
+    [self.navigationController pushViewController:searchMainViewController animated:YES];
 }
 
-- (void)vendorsButtonPressed {
-    PlaceListViewController *placeListViewController = [[PlaceListViewController alloc] init];
-    placeListViewController.downloadType = DownloadTypeWatcardVendors;
-    [self.navigationController pushViewController:placeListViewController animated:YES];
+- (void)examButtonPressed {
+    SearchMainViewController *searchMainViewController = [[SearchMainViewController alloc] init];
+    searchMainViewController.downloadType = DownloadTypeExamSchedule;
+    [self.navigationController pushViewController:searchMainViewController animated:YES];
 }
-*/
+
 @end

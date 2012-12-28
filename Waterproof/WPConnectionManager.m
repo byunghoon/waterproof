@@ -76,7 +76,19 @@ static NSString *BASE_URL = @"http://api.uwaterloo.ca/public/v1/?key=13d92fbc5c3
     NSString *urlString;
     switch (downloadType) {
         case DownloadTypeCourseSearch: {
-            urlString = [[BASE_URL stringByAppendingString:@"courseSearch&q="] stringByAppendingString:query];
+            urlString = [[BASE_URL stringByAppendingString:@"CourseSearch&q="] stringByAppendingString:query];
+            break;
+        }
+        case DownloadTypeProfessorSearch: {
+            urlString = [[BASE_URL stringByAppendingString:@"ProfessorSearch&q="] stringByAppendingString:query];
+            break;
+        }
+        case DownloadTypeCourseSchedule: {
+            urlString = [[BASE_URL stringByAppendingString:@"Schedule&q="] stringByAppendingString:query];
+            break;
+        }
+        case DownloadTypeExamSchedule: {
+            urlString = [[BASE_URL stringByAppendingString:@"ExamSchedule&q="] stringByAppendingString:query];
             break;
         }
         default:

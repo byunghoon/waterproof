@@ -8,7 +8,7 @@
 
 #import "SearchMainViewController.h"
 #import "WPConnectionManager.h"
-#import "WPCourse.h"
+#import "WPSearch.h"
 #import "Constants.h"
 
 @interface SearchMainViewController ()
@@ -33,6 +33,27 @@
     searchbar.placeholder = @"Query";
     searchbar.delegate = self;
     _tableView.tableHeaderView = searchbar;
+    
+    NSString *title;
+    
+    switch (_downloadType) {
+        case DownloadTypeCourseSearch:
+            title = @"Course Search";
+            break;
+        case DownloadTypeExamSchedule:
+            title = @"Exam Sehcdule";
+            break;
+        case DownloadTypeCourseSchedule:
+            title = @"Course Schedule";
+            break;
+        case DownloadTypeProfessorSearch:
+            title = @"Professors";
+            break;
+        default:
+            break;
+    }
+    
+    self.navigationItem.title = title;
 
 }
 
@@ -60,7 +81,6 @@
     [_spinner startAnimating];
     [searchBar setShowsCancelButton:YES animated:YES];
     [searchBar resignFirstResponder];
-    self.navigationItem.title = searchQuery;
     
     
     //start search
@@ -83,7 +103,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self defaultTableViewCell];
     
-    WPCourse *course = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    WPSearch *course = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.textLabel.text = course.name;
     
     return cell;
@@ -100,12 +120,35 @@
 
     //clear table
     [_courseArray removeAllObjects];
-    
+    if([resultArray count] == 0) {
+        printf("NOT FOUND");
+        WPSearch *notFound = [[WPSearch alloc] init];
+        notFound.name = @"Not Found";
+        [_courseArray addObject:notFound];
+    }
     
     if(downloadType == DownloadTypeCourseSearch) {
         for(NSDictionary *result in resultArray) {
             _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
-            WPCourse *course = [WPCourse courseWithData:result type:downloadType];
+            WPSearch *course = [WPSearch searchWithData:result type:downloadType];
+            [_courseArray addObject:course];
+        }
+    } else if(downloadType == DownloadTypeProfessorSearch) {
+        for(NSDictionary *result in resultArray) {
+            _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
+            WPSearch *course = [WPSearch searchWithData:result type:downloadType];
+            [_courseArray addObject:course];
+        }
+    } else if(downloadType == DownloadTypeCourseSchedule) {
+        for(NSDictionary *result in resultArray) {
+            _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
+            WPSearch *course = [WPSearch searchWithData:result type:downloadType];
+            [_courseArray addObject:course];
+        }
+    } else if(downloadType == DownloadTypeExamSchedule) {
+        for(NSDictionary *result in resultArray) {
+            _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
+            WPSearch *course = [WPSearch searchWithData:result type:downloadType];
             [_courseArray addObject:course];
         }
     }
