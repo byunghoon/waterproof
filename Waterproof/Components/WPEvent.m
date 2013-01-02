@@ -19,7 +19,16 @@
             event.name = [data objectForKey:@"Name"];
             event.date = [NSDate date];
             event.description = [data objectForKey:@"Description"];
-            event.links = [[data objectForKey:@"Links"] objectForKey:@"result"];
+            
+            id links = [[data objectForKey:@"Links"] objectForKey:@"result"];
+            if ([links isKindOfClass:[NSString class]] && ![links isEqualToString:@""]) {
+                event.links = [NSArray arrayWithObject:(NSString *)links];
+            } else if ([links isKindOfClass:[NSArray class]]) {
+                event.links = (NSArray *)links;
+            } else {
+                event.links = [NSArray array];
+            }
+            
             break;
         }
         case DownloadTypeCalendarEvents: {

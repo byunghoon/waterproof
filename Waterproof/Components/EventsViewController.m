@@ -9,9 +9,10 @@
 #import "EventsViewController.h"
 #import "Constants.h"
 #import "WPEvent.h"
-#import "EventDetailViewController.h"
+#import "WPGroupViewController.h"
 
-#define CUSTOM_CELL_HEIGHT 88.0
+#define CHEVRON_CELL_HEIGHT 88.0
+#define DETAIL_CELL_HEIGHT 70.0
 
 @interface EventsViewController ()
 
@@ -23,8 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    showChevron = YES;
     
     _dailyEventsArray = [NSMutableArray array];
     _dateSpecificEventsArray = [NSMutableArray array];
@@ -40,18 +39,26 @@
 #pragma mark - UITableView Delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self tableViewCellStyleDetailedForHeight:CUSTOM_CELL_HEIGHT];
+    UITableViewCell *cell;
     WPEvent *event = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    UILabel *titleLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_TITLE];
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_DETAIL];
-    
-    titleLabel.text = event.name;
-    titleLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:17.0f];
-    
     if (event.eventType == EventTypeHoliday) {
+        cell = [self tableViewCellStyleDetailedForHeight:DETAIL_CELL_HEIGHT];
+        
+        UILabel *titleLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_TITLE];
+        UILabel *detailLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_DETAIL];
+        
+        titleLabel.text = event.name;
+        titleLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:17.0f];
         detailLabel.text = @"University holiday";
     } else {
+        cell = [self tableViewCellStyleChevronForHeight:CHEVRON_CELL_HEIGHT];
+        
+        UILabel *titleLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_TITLE];
+        UILabel *detailLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_DETAIL];
+        
+        titleLabel.text = event.name;
+        titleLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:17.0f];
         detailLabel.text = event.description;
     }
     
@@ -59,17 +66,50 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return CUSTOM_CELL_HEIGHT;
+    WPEvent *event = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    
+    if (event.eventType == EventTypeHoliday) {
+        return DETAIL_CELL_HEIGHT;
+    } else {
+        return CHEVRON_CELL_HEIGHT;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    WPEvent *selectedEvent = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    WPEvent *event = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    EventDetailViewController *eventDetailViewController = [[EventDetailViewController alloc] init];
-    eventDetailViewController.selectedEvent = selectedEvent;
-	[self.navigationController pushViewController:eventDetailViewController animated:YES];
+    switch (event.eventType) {
+        case EventTypeDaily: {
+            NSArray *headers = [NSArray arrayWithObjects:@"Name", @"Description", @"Links", nil];
+            NSArray *data = [NSArray arrayWithObjects:event.name, event.description, event.links, nil];
+            
+            WPGroupViewController *groupViewController = [[WPGroupViewController alloc] init];
+            groupViewController.rawHeaders = headers;
+            groupViewController.rawData = data;
+            
+            [self.navigationController pushViewController:groupViewController animated:YES];
+            break;
+        }
+        case EventTypeCalendar: {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"EEEE, MMMM dd, yyyy"];
+            
+            NSArray *headers = [NSArray arrayWithObjects:@"Name", @"Date", @"Venue", @"Host", @"Description", @"Link", nil];
+            NSArray *data = [NSArray arrayWithObjects:event.name, event.date, event.venue, event.host, event.description, event.links, nil];
+            
+            WPGroupViewController *groupViewController = [[WPGroupViewController alloc] init];
+            groupViewController.rawHeaders = headers;
+            groupViewController.rawData = data;
+            
+            [self.navigationController pushViewController:groupViewController animated:YES];
+            break;
+        }
+        case EventTypeHoliday: {
+            break;
+        }
+    }
 }
 
 
@@ -107,7 +147,7 @@
             }
         }
         
-        [_tableViewHeaderString replaceObjectAtIndex:0 withObject:@"TODAY"];
+        [_tableViewHeaderString replaceObjectAtIndex:0 withObject:@"Featured Events"];
         [_tableView reloadData];
         [_spinner stopAnimating];
     }

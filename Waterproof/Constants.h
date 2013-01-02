@@ -33,12 +33,14 @@
 #   define kLabelAlignmentRight     NSTextAlignmentRight
 #   define kLabelTruncationTail     NSLineBreakByTruncatingTail
 #   define kLabelTruncationMiddle   NSLineBreakByTruncatingMiddle
+#   define kLabelLineBreakWordWrap  NSLineBreakByWordWrapping
 #else // older versions
 #   define kLabelAlignmentCenter    UITextAlignmentCenter
 #   define kLabelAlignmentLeft      UITextAlignmentLeft
 #   define kLabelAlignmentRight     UITextAlignmentRight
 #   define kLabelTruncationTail     UILineBreakModeTailTruncation
 #   define kLabelTruncationMiddle   UILineBreakModeMiddleTruncation
+#   define kLabelLineBreakWordWrap  UILineBreakModeWordWrap
 #endif
 
 #endif

@@ -39,24 +39,27 @@
     
     _tableViewData = [NSMutableArray array];
     _tableViewHeaderString = [NSMutableArray array];
-    
-    showChevron = NO;
 }
 
 
 #pragma mark - Helper
 
-- (UITableViewCell *)defaultTableViewCell {
+- (UITableViewCell *)tableViewCellStyleDefault {
     static NSString *CELL_IDENTIFIER = @"DefaultCell";
-    return [self tableViewCellWithIdentifier:CELL_IDENTIFIER height:DEFAULT_CELL_HEIGHT];
+    return [self tableViewCellWithIdentifier:CELL_IDENTIFIER height:DEFAULT_CELL_HEIGHT showChevron:NO];
 }
 
-- (UITableViewCell *)customTableViewCellForHeight:(float)height {
-    static NSString *CELL_IDENTIFIER = @"CustomCell";
-    return [self tableViewCellWithIdentifier:CELL_IDENTIFIER height:height];
+- (UITableViewCell *)tableViewCellStyleDetailedForHeight:(float)height {
+    static NSString *CELL_IDENTIFIER = @"DetailedCell";
+    return [self tableViewCellWithIdentifier:CELL_IDENTIFIER height:height showChevron:NO];
 }
 
-- (UITableViewCell *)tableViewCellWithIdentifier:(NSString *)identifier height:(float)height {
+- (UITableViewCell *)tableViewCellStyleChevronForHeight:(float)height {
+    static NSString *CELL_IDENTIFIER = @"ChevronCell";
+    return [self tableViewCellWithIdentifier:CELL_IDENTIFIER height:height showChevron:YES];
+}
+
+- (UITableViewCell *)tableViewCellWithIdentifier:(NSString *)identifier height:(float)height showChevron:(BOOL)showChevron {
     UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];

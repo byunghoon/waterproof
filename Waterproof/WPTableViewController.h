@@ -22,10 +22,10 @@
     UIActivityIndicatorView *_spinner;
     
     BOOL searchBarEnabled;
-    BOOL showChevron;
 }
 
 - (UITableViewCell *)tableViewCellStyleDefault;
 - (UITableViewCell *)tableViewCellStyleDetailedForHeight:(float)height;
+- (UITableViewCell *)tableViewCellStyleChevronForHeight:(float)height;
 
 @end
