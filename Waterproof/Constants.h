@@ -15,6 +15,10 @@
 #define WP_MARGIN_M         6
 #define WP_MARGIN_S         3
 
+// Global Font Name
+#define WP_FONT_CONTENT     @"Optima-Regular"
+#define WP_FONT_TITLE       @"Copperplate"
+
 // Colours
 #define WP_YELLOW           [UIColor colorWithRed:254.0/255.0 green:203.0/255.0 blue:0.0/255.0 alpha:1.0]
 

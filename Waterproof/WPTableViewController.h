@@ -9,6 +9,8 @@
 #import "WPBaseViewController.h"
 #import "WPConnectionManager.h"
 
+#define TAG_CELL_TEXTLABEL 201
+
 @interface WPTableViewController : WPBaseViewController <DownloadDelegate, UITableViewDelegate, UITableViewDataSource> {
     UITableView *_tableView;
     NSMutableArray *_tableViewHeaderString;
@@ -17,6 +19,7 @@
     UIActivityIndicatorView *_spinner;
     
     BOOL searchBarEnabled;
+    BOOL showChevron;
 }
 
 - (UITableViewCell *)defaultTableViewCell;

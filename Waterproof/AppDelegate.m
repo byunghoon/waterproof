@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "Constants.h"
 #import "EventsViewController.h"
 #import "SearchViewController.h"
 #import "PlacesViewController.h"
@@ -19,25 +20,50 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    // Override point for customization after application launch.
+    // Navigation Bar
     EventsViewController *eventsViewController = [[EventsViewController alloc] init];
     UINavigationController *firstNavigationController = [[UINavigationController alloc] initWithRootViewController:eventsViewController];
-    firstNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbaricon"] tag:0];
+    firstNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:nil tag:0];
+    [firstNavigationController.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_events_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_events"]];
+    [firstNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
     
     SearchViewController *searchViewController = [[SearchViewController alloc] init];
     UINavigationController *secondNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
-    secondNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Academic" image:[UIImage imageNamed:@"tabbaricon"] tag:1];
+    secondNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Search" image:nil tag:1];
+    [secondNavigationController.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_search_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_search"]];
+    [secondNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
     
     PlacesViewController *placesViewController = [[PlacesViewController alloc] init];
     UINavigationController *thirdNavigationController = [[UINavigationController alloc] initWithRootViewController:placesViewController];
-    thirdNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Places" image:[UIImage imageNamed:@"tabbaricon"] tag:2];
+    thirdNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Places" image:nil tag:2];
+    [thirdNavigationController.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_places_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_places"]];
+    [thirdNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
     
     SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
     UINavigationController *fourthNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-    fourthNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:[UIImage imageNamed:@"tabbaricon"] tag:3];
+    fourthNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:nil tag:3];
+    [fourthNavigationController.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_settings_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_settings"]];
+    [fourthNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
     
+    UIImage *backButtonImage = [[UIImage imageNamed:@"navbar_back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, backButtonImage.size.height*2) forBarMetrics:UIBarMetricsDefault];
+    
+    
+    // Tab Bar
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[firstNavigationController, secondNavigationController, thirdNavigationController, fourthNavigationController];
+    
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbar_bg"]];
+    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_selected"]];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIFont fontWithName:WP_FONT_TITLE size:11.0f], UITextAttributeFont,
+                                                       [UIColor whiteColor], UITextAttributeTextColor,
+                                                       nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIFont fontWithName:WP_FONT_TITLE size:11.0f], UITextAttributeFont,
+                                                       WP_YELLOW, UITextAttributeTextColor,
+                                                       nil] forState:UIControlStateSelected];
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];

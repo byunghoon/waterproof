@@ -40,9 +40,10 @@
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self defaultTableViewCell];
+    UILabel *textLabel = (UILabel *)[cell viewWithTag:TAG_CELL_TEXTLABEL];
     
     WPPlace *place = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.textLabel.text = place.name;
+    textLabel.text = place.name;
     
     return cell;
 }

@@ -34,26 +34,26 @@
     searchbar.delegate = self;
     _tableView.tableHeaderView = searchbar;
     
-    NSString *title;
-    
-    switch (_downloadType) {
-        case DownloadTypeCourseSearch:
-            title = @"Course Search";
-            break;
-        case DownloadTypeExamSchedule:
-            title = @"Exam Sehcdule";
-            break;
-        case DownloadTypeCourseSchedule:
-            title = @"Course Schedule";
-            break;
-        case DownloadTypeProfessorSearch:
-            title = @"Professors";
-            break;
-        default:
-            break;
-    }
-    
-    self.navigationItem.title = title;
+//    NSString *title;
+//    
+//    switch (_downloadType) {
+//        case DownloadTypeCourseSearch:
+//            title = @"Course Search";
+//            break;
+//        case DownloadTypeExamSchedule:
+//            title = @"Exam Sehcdule";
+//            break;
+//        case DownloadTypeCourseSchedule:
+//            title = @"Course Schedule";
+//            break;
+//        case DownloadTypeProfessorSearch:
+//            title = @"Professors";
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    self.navigationItem.title = title;
 
 }
 
@@ -102,9 +102,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self defaultTableViewCell];
+    UILabel *textLabel = (UILabel *)[cell viewWithTag:TAG_CELL_TEXTLABEL];
     
     WPSearch *course = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.textLabel.text = course.name;
+    textLabel.text = course.name;
     
     return cell;
 }
