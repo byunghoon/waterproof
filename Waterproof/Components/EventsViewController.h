@@ -9,7 +9,8 @@
 #import "WPTableViewController.h"
 
 @interface EventsViewController : WPTableViewController {
-    NSMutableArray *_eventsArray;
+    NSMutableArray *_dailyEventsArray;
+    NSMutableArray *_dateSpecificEventsArray;
     int activeConnections;
 }
 

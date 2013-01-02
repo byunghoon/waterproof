@@ -23,28 +23,44 @@
             break;
         }
         case DownloadTypeCalendarEvents: {
-            /*NSString *dateString = [data objectForKey:@"When"];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            //@"Tue, 19 Jul 2011 5:30 pm EDT - Tue, 19 Jul 2011 7:00 pm EDT"
-            [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-            NSDate *dateFromString = [[NSDate alloc] init];
-            dateFromString = [dateFormatter dateFromString:dateString];
-            */
             event.eventID = [data objectForKey:@"ID"];
             event.eventType = EventTypeCalendar;
             event.name = [data objectForKey:@"Title"];
-            event.date = [NSDate distantFuture];
             event.description = [data objectForKey:@"Description"];
             event.venue = [data objectForKey:@"Where"];
             event.host = [data objectForKey:@"Host"];
+            event.links = [NSArray arrayWithObject:[data objectForKey:@"Link"]];
+            
+            // Get Start Date
+            NSString *eventPeriod = [data objectForKey:@"When"]; //Tue, 19 Jul 2011 13:00:00 -0500 - Tue, 19 Jul 2011 14:30:00 -0500
+            NSRange dash = [eventPeriod rangeOfString:@" - "];
+            if (dash.location != NSNotFound) {
+                NSString *eventStart = [eventPeriod substringToIndex:dash.location];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"EEE, d MMM yyyy HH:mm:ss Z"]; //Tue, 19 Jul 2011 13:00:00 -0500
+                NSDate *eventDate = [[NSDate alloc] init];
+                eventDate = [dateFormatter dateFromString:eventStart];
+                event.date = eventDate;
+            } else {
+                event.date = [NSDate distantFuture];
+            }
+            
             break;
         }
         case DownloadTypeUniversityHolidays: {
             event.eventID = [data objectForKey:@"ID"];
-            event.eventType = EventTypeDaily;
+            event.eventType = EventTypeHoliday;
             event.name = [data objectForKey:@"Name"];
-            event.date = [NSDate date];
             event.description = [data objectForKey:@"Description"];
+            
+            // Get Start Date
+            NSString *holiday = [NSString stringWithFormat:@"%@ %@", [data objectForKey:@"Day"], [data objectForKey:@"Year"]];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"EEEE MMMM dd yyyy"]; //Monday February 16 2012
+            NSDate *date = [[NSDate alloc] init];
+            date = [dateFormatter dateFromString:holiday];
+            event.date = date;
+            
             break;
         }
         default:

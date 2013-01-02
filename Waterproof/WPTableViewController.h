@@ -9,7 +9,10 @@
 #import "WPBaseViewController.h"
 #import "WPConnectionManager.h"
 
-#define TAG_CELL_TEXTLABEL 201
+#define TAG_CELL_LABEL_TITLE 201
+#define TAG_CELL_LABEL_DETAIL 202
+
+#define DEFAULT_CELL_HEIGHT 44.0
 
 @interface WPTableViewController : WPBaseViewController <DownloadDelegate, UITableViewDelegate, UITableViewDataSource> {
     UITableView *_tableView;
@@ -22,6 +25,7 @@
     BOOL showChevron;
 }
 
-- (UITableViewCell *)defaultTableViewCell;
+- (UITableViewCell *)tableViewCellStyleDefault;
+- (UITableViewCell *)tableViewCellStyleDetailedForHeight:(float)height;
 
 @end

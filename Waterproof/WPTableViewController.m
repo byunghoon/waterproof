@@ -9,6 +9,8 @@
 #import "WPTableViewController.h"
 #import "Constants.h"
 
+#define TITLE_LABEL_HEIGHT 31.0
+
 @interface WPTableViewController ()
 
 @end
@@ -46,25 +48,44 @@
 
 - (UITableViewCell *)defaultTableViewCell {
     static NSString *CELL_IDENTIFIER = @"DefaultCell";
-    
-    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER];
+    return [self tableViewCellWithIdentifier:CELL_IDENTIFIER height:DEFAULT_CELL_HEIGHT];
+}
+
+- (UITableViewCell *)customTableViewCellForHeight:(float)height {
+    static NSString *CELL_IDENTIFIER = @"CustomCell";
+    return [self tableViewCellWithIdentifier:CELL_IDENTIFIER height:height];
+}
+
+- (UITableViewCell *)tableViewCellWithIdentifier:(NSString *)identifier height:(float)height {
+    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         
-        UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(0, WP_MARGIN_S, cell.frame.size.width, cell.frame.size.height-WP_MARGIN_S)];
+        UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(0, WP_MARGIN_S, cell.frame.size.width, height-WP_MARGIN_S)];
         cellView.backgroundColor = [UIColor whiteColor];
         
         if (showChevron) {
             UIImageView *chevronImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_chevron"]];
-            chevronImageView.frame = CGRectMake(cellView.frame.size.width - 30, (cellView.frame.size.height-15)/2, 15.0, 15.0);
+            chevronImageView.frame = CGRectMake(cellView.frame.size.width - 30, (height-15)/2, 15.0, 15.0);
             [cellView addSubview:chevronImageView];
         }
         
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, cellView.frame.size.width-50, cellView.frame.size.height-10)];
-        textLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:20.0f];
-        textLabel.textColor = [UIColor blackColor];
-        textLabel.tag = TAG_CELL_TEXTLABEL;
-        [cellView addSubview:textLabel];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, cellView.frame.size.width-50, TITLE_LABEL_HEIGHT)];
+        titleLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:20.0f];
+        titleLabel.textColor = [UIColor blackColor];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.tag = TAG_CELL_LABEL_TITLE;
+        [cellView addSubview:titleLabel];
+        
+        int maxY = CGRectGetMaxY(titleLabel.frame);
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, maxY, titleLabel.frame.size.width, height-maxY-7)];
+        detailLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:13.0f];
+        detailLabel.textColor = [UIColor darkGrayColor];
+        detailLabel.numberOfLines = 2;
+        detailLabel.lineBreakMode = kLabelTruncationTail;
+        detailLabel.backgroundColor = [UIColor clearColor];
+        detailLabel.tag = TAG_CELL_LABEL_DETAIL;
+        [cellView addSubview:detailLabel];
         
         [cell addSubview:cellView];
         

@@ -101,8 +101,8 @@
 #pragma mark - UITableView Delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self defaultTableViewCell];
-    UILabel *textLabel = (UILabel *)[cell viewWithTag:TAG_CELL_TEXTLABEL];
+    UITableViewCell *cell = [self tableViewCellStyleDefault];
+    UILabel *textLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_TITLE];
     
     WPSearch *course = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     textLabel.text = course.name;

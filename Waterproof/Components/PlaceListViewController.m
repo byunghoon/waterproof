@@ -9,6 +9,8 @@
 #import "PlaceListViewController.h"
 #import "PlaceDetailViewController.h"
 
+#define CUSTOM_CELL_HEIGHT 70.0
+
 @interface PlaceListViewController ()
 
 @end
@@ -39,13 +41,44 @@
 #pragma mark - UITableView Delegate
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self defaultTableViewCell];
-    UILabel *textLabel = (UILabel *)[cell viewWithTag:TAG_CELL_TEXTLABEL];
-    
+    UITableViewCell *cell = nil;
     WPPlace *place = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    textLabel.text = place.name;
-    
+    if (place.placeType == PlaceTypeBuildings) {
+        cell = [self tableViewCellStyleDetailedForHeight:CUSTOM_CELL_HEIGHT];
+        UILabel *titleLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_TITLE];
+        UILabel *detailLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_DETAIL];
+        
+        titleLabel.text = place.acronym;
+        detailLabel.text = place.name;
+    } else if (place.placeType == PlaceTypeParking && place.parkingType == ParkingTypeVisitor) {
+        cell = [self tableViewCellStyleDetailedForHeight:CUSTOM_CELL_HEIGHT];
+        UILabel *titleLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_TITLE];
+        UILabel *detailLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_DETAIL];
+        
+        titleLabel.text = place.name;
+        if (place.costInfo2) {
+            detailLabel.text = [NSString stringWithFormat:@"%@ | %@", place.costInfo1, place.costInfo2];
+        } else {
+            detailLabel.text = place.costInfo1;
+        }
+    } else {
+        cell = [self tableViewCellStyleDefault];
+        UILabel *titleLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_TITLE];
+        
+        titleLabel.text = place.name;
+    }
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WPPlace *place = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if (place.placeType == PlaceTypeBuildings) {
+        return CUSTOM_CELL_HEIGHT;
+    } else if (place.placeType == PlaceTypeParking && place.parkingType == ParkingTypeVisitor) {
+        return CUSTOM_CELL_HEIGHT;
+    } else {
+        return DEFAULT_CELL_HEIGHT;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,8 +142,9 @@
         // insert place objects into placeArray
         for (int i=0; i<[resultArray count]; i++) {
             WPPlace *place = [WPPlace placeWithData:[resultArray objectAtIndex:i] type:downloadType];
-            if (place.name) {
-                char firstLetter = [place.name characterAtIndex:0];
+            NSString *pivot = (place.placeType==PlaceTypeBuildings) ? place.acronym : place.name;
+            if (pivot) {
+                char firstLetter = [pivot characterAtIndex:0];
                 if (firstLetter >= 'A' && firstLetter <= 'Z') {
                     [[placesArray objectAtIndex:(firstLetter-'A')] addObject:place];
                 } else if (firstLetter >= 'a' && firstLetter <- 'z') {

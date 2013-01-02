@@ -44,6 +44,8 @@ typedef enum {
 @property (nonatomic, strong) NSString *weekendCost;
 @property (nonatomic, strong) NSString *after4Cost;
 @property (nonatomic, strong) NSString *hourlyCost;
+@property (nonatomic, strong) NSString *costInfo1;
+@property (nonatomic, strong) NSString *costInfo2;
 
 // Watcard Vendors
 @property (nonatomic, strong) NSString *imageURL;

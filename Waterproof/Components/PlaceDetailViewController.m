@@ -72,43 +72,16 @@
     if (_place.parkingType == ParkingTypeVisitor) {
         UILabel *costLabel = [[UILabel alloc] initWithFrame:CGRectMake(WP_MARGIN_M, CGRectGetMaxY(typeLabel.frame)+WP_MARGIN_M, typeLabel.frame.size.width, LABEL_HEIGHT)];
         costLabel.backgroundColor = [UIColor clearColor];
+        costLabel.text = _place.costInfo1;
         [self.view addSubview:costLabel];
-        
-        BOOL hasHourlyCost = ![_place.hourlyCost isEqualToString:@""];
-        BOOL hasMaxCost = ![_place.maxCost isEqualToString:@""];
-        BOOL hasAfter4Cost = ![_place.after4Cost isEqualToString:@""];
-        BOOL hasWeekendCost = ![_place.weekendCost isEqualToString:@""];
-        
-        if (hasHourlyCost && hasMaxCost) {
-            costLabel.text = [NSString stringWithFormat:@"$%@ per hour up to $%@", _place.hourlyCost, _place.maxCost];
-        } else if (hasMaxCost) {
-            costLabel.text = [NSString stringWithFormat:@"Flat fee $%@", _place.maxCost];
-        }
         
         cumulativeMaxY = CGRectGetMaxY(costLabel.frame);
         
-        if (hasAfter4Cost || hasWeekendCost) {
+        if (_place.costInfo2) {
             UILabel *costLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(WP_MARGIN_M, CGRectGetMaxY(costLabel.frame)+WP_MARGIN_M, typeLabel.frame.size.width, LABEL_HEIGHT)];
             costLabel2.backgroundColor = [UIColor clearColor];
+            costLabel2.text = _place.costInfo2;
             [self.view addSubview:costLabel2];
-            
-            if (hasAfter4Cost && hasWeekendCost) {
-                if ([_place.weekendCost isEqualToString:@"0"]) {
-                    costLabel2.text = [NSString stringWithFormat:@"$%@ after 4pm, free on weekends", _place.after4Cost];
-                } else {
-                    costLabel2.text = [NSString stringWithFormat:@"$%@ after 4pm, $%@ on weekends", _place.after4Cost, _place.weekendCost];
-                }
-            }
-            else if (hasAfter4Cost) {
-                costLabel2.text = [NSString stringWithFormat:@"$%@ after 4pm", _place.after4Cost];
-            }
-            else if (hasWeekendCost) {
-                if ([_place.weekendCost isEqualToString:@"0"]) {
-                    costLabel2.text = @"free on weekends";
-                } else {
-                    costLabel2.text = [NSString stringWithFormat:@"$%@ on weekends", _place.weekendCost];
-                }
-            }
             
             cumulativeMaxY = CGRectGetMaxY(costLabel2.frame);
         }

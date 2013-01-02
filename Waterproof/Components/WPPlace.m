@@ -58,6 +58,40 @@
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[lat floatValue] longitude:[lon floatValue]];
             place.geolocation = location;
             
+            
+            // Cost Information String
+            if (place.parkingType == ParkingTypeVisitor) {
+                BOOL hasHourlyCost = ![place.hourlyCost isEqualToString:@""];
+                BOOL hasMaxCost = ![place.maxCost isEqualToString:@""];
+                BOOL hasAfter4Cost = ![place.after4Cost isEqualToString:@""];
+                BOOL hasWeekendCost = ![place.weekendCost isEqualToString:@""];
+                
+                if (hasHourlyCost && hasMaxCost) {
+                    place.costInfo1 = [NSString stringWithFormat:@"$%@/hr up to $%@", place.hourlyCost, place.maxCost];
+                } else if (hasMaxCost) {
+                    place.costInfo1 = [NSString stringWithFormat:@"Flat fee $%@", place.maxCost];
+                }
+                
+                if (hasAfter4Cost || hasWeekendCost) {
+                    if (hasAfter4Cost && hasWeekendCost) {
+                        if ([place.weekendCost isEqualToString:@"0"]) {
+                            place.costInfo2 = [NSString stringWithFormat:@"$%@ after 4pm, free on weekends", place.after4Cost];
+                        } else {
+                            place.costInfo2 = [NSString stringWithFormat:@"$%@ after 4pm, $%@ on weekends", place.after4Cost, place.weekendCost];
+                        }
+                    }
+                    else if (hasAfter4Cost) {
+                        place.costInfo2 = [NSString stringWithFormat:@"$%@ after 4pm", place.after4Cost];
+                    }
+                    else if (hasWeekendCost) {
+                        if ([place.weekendCost isEqualToString:@"0"]) {
+                            place.costInfo2 = @"free on weekends";
+                        } else {
+                            place.costInfo2 = [NSString stringWithFormat:@"$%@ on weekends", place.weekendCost];
+                        }
+                    }
+                }
+            }
             break;
         }
         case DownloadTypeWatcardVendors: {
