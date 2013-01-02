@@ -27,7 +27,8 @@
     
     _tableView.bounces = NO;
     
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshTableView)];
+    
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navbar_refresh"] style:UIBarButtonItemStyleBordered target:self action:@selector(refreshTableView)];
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 
     [[WPConnectionManager instance] download:DownloadTypeWatPark delegate:self];
@@ -85,40 +86,46 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        int lotLabelSize = self.view.frame.size.height / [_tableViewData count] - (2*WP_MARGIN_M);
-        UILabel *lotLabel = [[UILabel alloc] initWithFrame:CGRectMake(WP_MARGIN_M, WP_MARGIN_M, lotLabelSize, lotLabelSize)];
-        lotLabel.backgroundColor = [UIColor clearColor];
-        lotLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:lotLabelSize*0.8];
-        lotLabel.tag = TAG_LOT_LABEL;
-        [cell addSubview:lotLabel];
+        UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(0, WP_MARGIN_S, cell.frame.size.width, cellHeight-WP_MARGIN_S)];
+        cellView.backgroundColor = [UIColor whiteColor];
         
-        int maxX = CGRectGetMaxX(lotLabel.frame)+WP_MARGIN_L;
+        int lotLabelSize = self.view.frame.size.height / [_tableViewData count] - (2*WP_MARGIN_M);
+        UILabel *lotLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, WP_MARGIN_M, lotLabelSize, lotLabelSize)];
+        lotLabel.backgroundColor = [UIColor clearColor];
+        lotLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:lotLabelSize*0.8];
+        lotLabel.textAlignment = kLabelAlignmentCenter;
+        lotLabel.tag = TAG_LOT_LABEL;
+        [cellView addSubview:lotLabel];
+        
+        int maxX = CGRectGetMaxX(lotLabel.frame)+WP_MARGIN_M+WP_MARGIN_L;
         int percentageViewHeight = 30;
         UIView *percentageView = [[UIView alloc] initWithFrame:CGRectMake(maxX, (cellHeight-percentageViewHeight)/2, self.view.frame.size.width-maxX-WP_MARGIN_M, percentageViewHeight)];
         percentageView.backgroundColor = WP_YELLOW;
         percentageView.tag = TAG_PERCENTAGE_VIEW;
-        [cell addSubview:percentageView];
+        [cellView addSubview:percentageView];
         
         UIView *fullGaugeView = [[UIView alloc] initWithFrame:CGRectMake(maxX, CGRectGetMaxY(percentageView.frame), self.view.frame.size.width-maxX-WP_MARGIN_M, 2)];
         fullGaugeView.backgroundColor = [UIColor grayColor];
-        [cell addSubview:fullGaugeView];
+        [cellView addSubview:fullGaugeView];
         
         int smallLabelWidth = 120;
         int smallLabelHeight = 15;
         
-        UILabel *lastUpdatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-smallLabelWidth-WP_MARGIN_M, WP_MARGIN_M, smallLabelWidth, smallLabelHeight)];
+        UILabel *lastUpdatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-smallLabelWidth-WP_MARGIN_M, WP_MARGIN_L, smallLabelWidth, smallLabelHeight)];
         lastUpdatedLabel.backgroundColor = [UIColor clearColor];
         lastUpdatedLabel.textAlignment = kLabelAlignmentRight;
-        lastUpdatedLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:smallLabelHeight*0.8];
+        lastUpdatedLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:smallLabelHeight];
         lastUpdatedLabel.tag = TAG_LAST_UPDATED_LABEL;
-        [cell addSubview:lastUpdatedLabel];
+        [cellView addSubview:lastUpdatedLabel];
         
-        UILabel *outOfLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-smallLabelWidth-WP_MARGIN_M, cellHeight-smallLabelHeight-WP_MARGIN_M, smallLabelWidth, smallLabelHeight)];
+        UILabel *outOfLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width-smallLabelWidth-WP_MARGIN_M, cellHeight-smallLabelHeight-WP_MARGIN_L, smallLabelWidth, smallLabelHeight)];
         outOfLabel.backgroundColor = [UIColor clearColor];
         outOfLabel.textAlignment = kLabelAlignmentRight;
-        outOfLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:smallLabelHeight*0.8];
+        outOfLabel.font = [UIFont fontWithName:WP_FONT_CONTENT size:smallLabelHeight];
         outOfLabel.tag = TAG_OUT_OF_LABEL;
-        [cell addSubview:outOfLabel];
+        [cellView addSubview:outOfLabel];
+        
+        [cell addSubview:cellView];
     }
     
     NSDictionary *data = [_tableViewData objectAtIndex:indexPath.row];

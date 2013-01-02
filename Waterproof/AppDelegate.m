@@ -45,9 +45,13 @@
     [fourthNavigationController.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_settings_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_settings"]];
     [fourthNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
     
-    UIImage *backButtonImage = [[UIImage imageNamed:@"navbar_back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
+    UIImage *backButtonImage = [[UIImage imageNamed:@"navbar_back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 45, 0, 0)];
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, backButtonImage.size.height*2) forBarMetrics:UIBarMetricsDefault];
+    
+    UIImage *rightButtonImage = [[UIImage imageNamed:@"tabbar_selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 80, 0, 0)];
+    [[UIBarButtonItem appearance] setBackgroundImage:rightButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0, rightButtonImage.size.height*2) forBarMetrics:UIBarMetricsDefault];
     
     
     // Tab Bar
