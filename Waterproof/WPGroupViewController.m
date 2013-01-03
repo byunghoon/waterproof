@@ -12,10 +12,12 @@
 
 #define TAG_CELL_CONTAINER_VIEW 301
 #define TAG_CELL_LABEL_GROUPED  302
+#define TAG_CELL_LINK_GROUPED   303
 #define GROUPED_CELL_MARGIN     10.0
 #define GROUPED_CELL_WIDTH      300.0
 #define GROUPED_LABEL_WIDTH     280.0
 #define DEFAULT_CELL_FONT       [UIFont fontWithName:WP_FONT_CONTENT size:14.0f]
+#define DEFAULT_LINK_FONT       [UIFont fontWithName:WP_FONT_CONTENT size:12.0f]
 
 @interface WPGroupViewController ()
 
@@ -87,12 +89,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *header = [_tableViewHeaderString objectAtIndex:indexPath.section];
     NSString *text = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    
+    // Dynamically adjusting cell height
     CGSize constraintSize = CGSizeMake(GROUPED_LABEL_WIDTH, MAXFLOAT);
-    CGSize labelSize = [text sizeWithFont:DEFAULT_CELL_FONT
+    CGSize labelSize = [text sizeWithFont:([header isEqualToString:@"Links"] ? DEFAULT_LINK_FONT : DEFAULT_CELL_FONT)
                         constrainedToSize:constraintSize
                             lineBreakMode:kLabelLineBreakWordWrap];
-    return labelSize.height + (2*WP_MARGIN_M);
+    return labelSize.height + (2*WP_MARGIN_M) + ([header isEqualToString:@"Links"] ? WP_MARGIN_M : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,23 +119,48 @@
         textLabel.tag = TAG_CELL_LABEL_GROUPED;
         [cellView addSubview:textLabel];
         
+        UITextView *linkTextView = [[UITextView alloc] initWithFrame:CGRectMake(GROUPED_CELL_MARGIN, WP_MARGIN_M, GROUPED_LABEL_WIDTH, MAXFLOAT)];
+        linkTextView.editable = NO;
+        linkTextView.dataDetectorTypes = UIDataDetectorTypeLink;
+        linkTextView.font = DEFAULT_LINK_FONT;
+        linkTextView.textColor = [UIColor blackColor];
+        linkTextView.backgroundColor = [UIColor clearColor];
+        linkTextView.tag = TAG_CELL_LINK_GROUPED;
+        [cellView addSubview:linkTextView];
+        
         [cell addSubview:cellView];
     }
     
+    // Dynamically adjusting cell height
     UIView *cellView = [cell viewWithTag:TAG_CELL_CONTAINER_VIEW];
-    UILabel *textLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_GROUPED];
-    textLabel.text = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSString *header = [_tableViewHeaderString objectAtIndex:indexPath.section];
     
-    CGSize constraintSize = CGSizeMake(GROUPED_LABEL_WIDTH, MAXFLOAT);
-    CGSize labelSize = [[textLabel text] sizeWithFont:DEFAULT_CELL_FONT
-                                    constrainedToSize:constraintSize
-                                        lineBreakMode:kLabelLineBreakWordWrap];
-    
-    
-    textLabel.frame = CGRectMake(GROUPED_CELL_MARGIN, WP_MARGIN_M, GROUPED_LABEL_WIDTH, labelSize.height);
-    cellView.frame = CGRectMake(GROUPED_CELL_MARGIN, WP_MARGIN_S, GROUPED_CELL_WIDTH, labelSize.height+(2*WP_MARGIN_M));
-    cell.frame = CGRectMake(0, 0, cell.frame.size.width, labelSize.height+(2*WP_MARGIN_M));
-    
+    if ([header isEqualToString:@"Links"]) { // Recognize Links
+        UITextView *linkView = (UITextView *)[cell viewWithTag:TAG_CELL_LINK_GROUPED];
+        linkView.text = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        CGSize constraintSize = CGSizeMake(GROUPED_LABEL_WIDTH, MAXFLOAT);
+        CGSize labelSize = [[linkView text] sizeWithFont:DEFAULT_LINK_FONT
+                                        constrainedToSize:constraintSize
+                                            lineBreakMode:kLabelLineBreakWordWrap];
+        
+        linkView.frame = CGRectMake(0, 0, GROUPED_CELL_WIDTH, labelSize.height+WP_MARGIN_M);
+        cellView.frame = CGRectMake(GROUPED_CELL_MARGIN, WP_MARGIN_S, GROUPED_CELL_WIDTH, labelSize.height+(3*WP_MARGIN_M));
+        cell.frame = CGRectMake(0, 0, cell.frame.size.width, labelSize.height+(3*WP_MARGIN_M));
+        
+    } else {
+        UILabel *textLabel = (UILabel *)[cell viewWithTag:TAG_CELL_LABEL_GROUPED];
+        textLabel.text = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        CGSize constraintSize = CGSizeMake(GROUPED_LABEL_WIDTH, MAXFLOAT);
+        CGSize labelSize = [[textLabel text] sizeWithFont:DEFAULT_CELL_FONT
+                                        constrainedToSize:constraintSize
+                                            lineBreakMode:kLabelLineBreakWordWrap];
+        
+        textLabel.frame = CGRectMake(GROUPED_CELL_MARGIN, WP_MARGIN_M, GROUPED_LABEL_WIDTH, labelSize.height);
+        cellView.frame = CGRectMake(GROUPED_CELL_MARGIN, WP_MARGIN_S, GROUPED_CELL_WIDTH, labelSize.height+(2*WP_MARGIN_M));
+        cell.frame = CGRectMake(0, 0, cell.frame.size.width, labelSize.height+(2*WP_MARGIN_M));
+    }
     
     return cell;
 }
