@@ -215,7 +215,7 @@
     headerBackgroundView.backgroundColor = WP_YELLOW;
     [headerView addSubview:headerBackgroundView];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(2*MARGIN_GROUP_CELL, 0, WIDTH_LABEL, _tableView.sectionHeaderHeight)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(2*MARGIN_GROUP_CELL, WP_MARGIN_S, WIDTH_LABEL, _tableView.sectionHeaderHeight-WP_MARGIN_S)];
     label.text = [_tableViewHeaderString objectAtIndex:section];
     label.textColor = [UIColor blackColor];
     label.font = [UIFont fontWithName:WP_FONT_TITLE size:14.0f];

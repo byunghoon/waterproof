@@ -8,6 +8,8 @@
 
 #import "WPGroupViewController.h"
 
-@interface SettingsViewController : WPGroupViewController
+@interface SettingsViewController : WPGroupViewController {
+    NSMutableArray *courses;
+}
 
 @end
