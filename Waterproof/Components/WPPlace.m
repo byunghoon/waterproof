@@ -85,7 +85,7 @@
                     }
                     else if (hasWeekendCost) {
                         if ([place.weekendCost isEqualToString:@"0"]) {
-                            place.costInfo2 = @"free on weekends";
+                            place.costInfo2 = @"Free on weekends";
                         } else {
                             place.costInfo2 = [NSString stringWithFormat:@"$%@ on weekends", place.weekendCost];
                         }

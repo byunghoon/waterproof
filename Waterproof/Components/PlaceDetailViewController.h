@@ -6,10 +6,13 @@
 //  Copyright (c) 2012 Kokkiri. All rights reserved.
 //
 
-#import "WPBaseViewController.h"
+#import "WPGroupViewController.h"
 #import "WPPlace.h"
 
-@interface PlaceDetailViewController : WPBaseViewController
+@interface PlaceDetailViewController : WPGroupViewController {
+    UISegmentedControl *segmentedControl;
+    UIWebView *_mapView;
+}
 
 @property (nonatomic, strong) WPPlace *place;
 

@@ -38,6 +38,29 @@
 }
 
 
+#pragma mark - Helper
+
+- (NSString *)textFromParkingType:(ParkingType)parkingType andPaymentType:(NSString *)paymentType {
+    NSString *text;
+    
+    if (parkingType == ParkingTypeVisitor) {
+        if ([paymentType isEqualToString:@"PayAndDisplay"]) {
+            text = @"Visitor Parking - pay and display";
+        } else {
+            text = @"Visitor Parking - coin entry";
+        }
+    } else if (parkingType == ParkingTypeStudentPermit) {
+        text = @"Student Permit Parking";
+    } else if (parkingType == ParkingTypeFacultyAndStaff) {
+        text = @"Faculty and Staff Only";
+    } else if (parkingType == ParkingTypeResident) {
+        text = @"Resident Parking";
+    }
+    
+    return text;
+}
+
+
 #pragma mark - UITableView Delegate
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,9 +107,49 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    PlaceDetailViewController *placeDetailViewController = [[PlaceDetailViewController alloc] init];
-    placeDetailViewController.place = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:placeDetailViewController animated:YES];
+    WPPlace *place = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    
+    switch (place.placeType) {
+        case PlaceTypeBuildings: {
+            NSArray *headers = [NSArray arrayWithObjects:@"Abbreviation", @"Full Name", nil];
+            NSArray *data = [NSArray arrayWithObjects:place.acronym, place.name, nil];
+            
+            PlaceDetailViewController *placeDetailViewController = [[PlaceDetailViewController alloc] init];
+            placeDetailViewController.place = place;
+            placeDetailViewController.rawHeaders = headers;
+            placeDetailViewController.rawData = data;
+            
+            [self.navigationController pushViewController:placeDetailViewController animated:YES];
+            break;
+        }
+        case PlaceTypeParking: {
+            NSString *type = [self textFromParkingType:place.parkingType andPaymentType:place.paymentType];
+            NSArray *costs = place.costInfo2 ? [NSArray arrayWithObjects:place.costInfo1, place.costInfo2, nil] : [NSArray arrayWithObject:place.costInfo1];
+            
+            NSArray *headers = [NSArray arrayWithObjects:@"Name", @"Type", @"Costs", nil];
+            NSArray *data = [NSArray arrayWithObjects:place.name, type, costs, nil];
+            
+            PlaceDetailViewController *placeDetailViewController = [[PlaceDetailViewController alloc] init];
+            placeDetailViewController.place = place;
+            placeDetailViewController.rawHeaders = headers;
+            placeDetailViewController.rawData = data;
+            
+            [self.navigationController pushViewController:placeDetailViewController animated:YES];
+            break;
+        }
+        case PlaceTypeWatcardVendors: {
+            NSArray *headers = [NSArray arrayWithObjects:@"Name", @"Phone Number", nil];
+            NSArray *data = [NSArray arrayWithObjects:place.name, place.phoneNumber, nil];
+            
+            PlaceDetailViewController *placeDetailViewController = [[PlaceDetailViewController alloc] init];
+            placeDetailViewController.place = place;
+            placeDetailViewController.rawHeaders = headers;
+            placeDetailViewController.rawData = data;
+            
+            [self.navigationController pushViewController:placeDetailViewController animated:YES];
+            break;
+        }
+    }
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {

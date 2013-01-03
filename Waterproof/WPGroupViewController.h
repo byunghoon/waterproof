@@ -8,11 +8,16 @@
 
 #import "WPBaseViewController.h"
 
+#define MARGIN_GROUP_CELL       10.0
+#define WIDTH_CELL              300.0
+#define WIDTH_LABEL             280.0
+
 @interface WPGroupViewController : WPBaseViewController <UITableViewDelegate, UITableViewDataSource> {
     UITableView *_tableView;
     
     NSMutableArray *_tableViewHeaderString;
     NSMutableArray *_tableViewData;
+    NSMutableArray *_specialDataFlag;
 }
 
 @property (nonatomic, strong) NSArray *rawHeaders;

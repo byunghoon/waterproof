@@ -8,9 +8,6 @@
 
 #import "PlaceDetailViewController.h"
 #import "Constants.h"
-#import "UIImageView+AFNetworking.h"
-
-#define LABEL_HEIGHT 25
 
 @interface PlaceDetailViewController ()
 
@@ -21,100 +18,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(WP_MARGIN_M, WP_MARGIN_M, self.view.frame.size.width-(2*WP_MARGIN_M), LABEL_HEIGHT)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:titleLabel];
-    float maxY = CGRectGetMaxY(titleLabel.frame);
+    segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Info", @"Map", nil]];
+    segmentedControl.frame = CGRectMake(MARGIN_GROUP_CELL, MARGIN_GROUP_CELL, WIDTH_CELL, 30);
+    [segmentedControl addTarget:self action:@selector(segmentChanged) forControlEvents:UIControlEventValueChanged];
+    segmentedControl.selectedSegmentIndex = 0;
     
-    if (_place.placeType == PlaceTypeBuildings) {
-        titleLabel.text = [NSString stringWithFormat:@"%@ (%@)", _place.name, _place.acronym];
-        
-    } else if (_place.placeType == PlaceTypeParking) {
-        titleLabel.text = [NSString stringWithFormat:@"Parking Lot %@", _place.name];
-        maxY = [self drawParkingDetails];
-        
-    } else if (_place.placeType == PlaceTypeWatcardVendors) {
-        titleLabel.text = _place.name;
-        maxY = [self drawVendorDetails];
-    }
+    [segmentedControl setDividerImage:[UIImage imageNamed:@"segcon_divider"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [segmentedControl setDividerImage:[UIImage imageNamed:@"segcon_divider"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [segmentedControl setBackgroundImage:[UIImage imageNamed:@"segcon_yellow"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [segmentedControl setBackgroundImage:[UIImage imageNamed:@"segcon_white"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [segmentedControl setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                              [UIFont fontWithName:WP_FONT_TITLE size:20.0f], UITextAttributeFont,
+                                              [UIColor blackColor], UITextAttributeTextColor,
+                                              nil] forState:UIControlStateSelected];
+    [segmentedControl setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                              [UIFont fontWithName:WP_FONT_TITLE size:20.0f], UITextAttributeFont,
+                                              [UIColor blackColor], UITextAttributeTextColor,
+                                              nil] forState:UIControlStateNormal];
+    
+    [self.view addSubview:segmentedControl];
+    
+    int maxY = CGRectGetMaxY(segmentedControl.frame)+WP_MARGIN_M;
+    _tableView.frame = CGRectMake(_tableView.frame.origin.x, maxY, _tableView.frame.size.width, _tableView.frame.size.height-maxY);
     
     NSString *urlString = [NSString stringWithFormat:@"https://maps.google.ca/maps?q=%f,%f", _place.geolocation.coordinate.latitude, _place.geolocation.coordinate.longitude];
-    UIWebView *mapView = [[UIWebView alloc] initWithFrame:CGRectMake(0, maxY+WP_MARGIN_M, self.view.frame.size.width, self.view.frame.size.height-(maxY+WP_MARGIN_M))];
-    [mapView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
-    [self.view addSubview:mapView];
+    _mapView = [[UIWebView alloc] initWithFrame:_tableView.frame];
+    [_mapView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+    [self.view addSubview:_mapView];
+    _mapView.hidden = YES;
 }
 
-- (float)drawParkingDetails {
-    float cumulativeMaxY = LABEL_HEIGHT+(2*WP_MARGIN_M);
-    
-    // Parking and Payment Type
-    UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(WP_MARGIN_M, cumulativeMaxY, self.view.frame.size.width-(2*WP_MARGIN_M), LABEL_HEIGHT)];
-    typeLabel.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:typeLabel];
-    
-    if (_place.parkingType == ParkingTypeVisitor) {
-        if ([_place.paymentType isEqualToString:@"PayAndDisplay"]) {
-            typeLabel.text = @"Visitor Parking - pay and display";
-        } else {
-            typeLabel.text = @"Visitor Parking - coin entry";
-        }
-    } else if (_place.parkingType == ParkingTypeStudentPermit) {
-        typeLabel.text = @"Student Permit Parking";
-    } else if (_place.parkingType == ParkingTypeFacultyAndStaff) {
-        typeLabel.text = @"Faculty and Staff Only";
-    } else if (_place.parkingType == ParkingTypeResident) {
-        typeLabel.text = @"Resident Parking";
+- (void)segmentChanged {
+    if (segmentedControl.selectedSegmentIndex == 0) {
+        _tableView.hidden = NO;
+        _mapView.hidden = YES;
+    } else {
+        _tableView.hidden = YES;
+        _mapView.hidden = NO;
     }
-    
-    cumulativeMaxY = CGRectGetMaxY(typeLabel.frame);
-    
-    // Cost Information Label, only when parking type is visitor
-    if (_place.parkingType == ParkingTypeVisitor) {
-        UILabel *costLabel = [[UILabel alloc] initWithFrame:CGRectMake(WP_MARGIN_M, CGRectGetMaxY(typeLabel.frame)+WP_MARGIN_M, typeLabel.frame.size.width, LABEL_HEIGHT)];
-        costLabel.backgroundColor = [UIColor clearColor];
-        costLabel.text = _place.costInfo1;
-        [self.view addSubview:costLabel];
-        
-        cumulativeMaxY = CGRectGetMaxY(costLabel.frame);
-        
-        if (_place.costInfo2) {
-            UILabel *costLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(WP_MARGIN_M, CGRectGetMaxY(costLabel.frame)+WP_MARGIN_M, typeLabel.frame.size.width, LABEL_HEIGHT)];
-            costLabel2.backgroundColor = [UIColor clearColor];
-            costLabel2.text = _place.costInfo2;
-            [self.view addSubview:costLabel2];
-            
-            cumulativeMaxY = CGRectGetMaxY(costLabel2.frame);
-        }
-        
-        return cumulativeMaxY;
-    }
-    
-    return CGRectGetMaxY(typeLabel.frame);
-}
-
-- (float)drawVendorDetails {
-    float cumulativeMaxY = LABEL_HEIGHT+(2*WP_MARGIN_M);
-    
-    // Phone Number TextView
-    if (_place.phoneNumber) {
-        UITextView *phoneNumberView = [[UITextView alloc] initWithFrame:CGRectMake(WP_MARGIN_M, cumulativeMaxY, self.view.frame.size.width-(2*WP_MARGIN_M), LABEL_HEIGHT)];
-        phoneNumberView.text = _place.phoneNumber;
-        phoneNumberView.backgroundColor = [UIColor clearColor];
-        phoneNumberView.editable = NO;
-        phoneNumberView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
-        [self.view addSubview:phoneNumberView];
-        cumulativeMaxY = (cumulativeMaxY > CGRectGetMaxY(phoneNumberView.frame)) ? cumulativeMaxY : CGRectGetMaxY(phoneNumberView.frame);
-    }
-    
-    // Logo ImageView
-    if (_place.imageURL) {
-        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-WP_MARGIN_M-70, WP_MARGIN_M, 70, 70)];
-        [logoView setImageWithURL:[NSURL URLWithString:_place.imageURL]];
-        [self.view addSubview:logoView];
-        cumulativeMaxY = (cumulativeMaxY > CGRectGetMaxY(logoView.frame)) ? cumulativeMaxY : CGRectGetMaxY(logoView.frame);
-    }
-    
-    return cumulativeMaxY;
 }
 
 @end
