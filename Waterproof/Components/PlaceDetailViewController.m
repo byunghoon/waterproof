@@ -8,6 +8,7 @@
 
 #import "PlaceDetailViewController.h"
 #import "Constants.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface PlaceDetailViewController ()
 
@@ -18,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Segmented Control
     segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Info", @"Map", nil]];
     segmentedControl.frame = CGRectMake(MARGIN_GROUP_CELL, MARGIN_GROUP_CELL, WIDTH_CELL, 30);
     [segmentedControl addTarget:self action:@selector(segmentChanged) forControlEvents:UIControlEventValueChanged];
@@ -38,9 +40,33 @@
     
     [self.view addSubview:segmentedControl];
     
+    
+    // UITableView
     int maxY = CGRectGetMaxY(segmentedControl.frame)+WP_MARGIN_M;
     _tableView.frame = CGRectMake(_tableView.frame.origin.x, maxY, _tableView.frame.size.width, _tableView.frame.size.height-maxY);
     
+    if (_place.placeType == PlaceTypeWatcardVendors && _place.imageURL) {
+        UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 70)];
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(125, 0, 70, 70)];
+        [tableFooterView addSubview:logoView];
+        _tableView.tableFooterView = tableFooterView;
+        
+        __weak UIImageView *weakView = logoView;
+        [logoView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_place.imageURL]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            float newHeight = 70.0;
+            float proportion = image.size.height / newHeight;
+            float newWidth = image.size.width / proportion;
+            
+            [weakView setFrame:CGRectMake((self.view.frame.size.width-newWidth)/2, 0, newWidth, newHeight)];
+            [weakView setImage:image];
+        } failure:
+         ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+             
+         }];
+    }
+    
+    
+    // UIWebView
     NSString *urlString = [NSString stringWithFormat:@"https://maps.google.ca/maps?q=%f,%f", _place.geolocation.coordinate.latitude, _place.geolocation.coordinate.longitude];
     _mapView = [[UIWebView alloc] initWithFrame:_tableView.frame];
     [_mapView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
