@@ -21,43 +21,40 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
+	
     _courseArray = [NSMutableArray array];
     
     // stop spinner. (turn on when search started)
     [_spinner stopAnimating];
     
-    searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
-    searchbar.tintColor = WP_YELLOW;
-    searchbar.placeholder = @"Query";
-    searchbar.delegate = self;
-    _tableView.tableHeaderView = searchbar;
+    // Search bar
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    _searchBar.placeholder = @"Tab here to begin search.";
+    _searchBar.delegate = self;
     
-//    NSString *title;
-//    
-//    switch (_downloadType) {
-//        case DownloadTypeCourseSearch:
-//            title = @"Course Search";
-//            break;
-//        case DownloadTypeExamSchedule:
-//            title = @"Exam Sehcdule";
-//            break;
-//        case DownloadTypeCourseSchedule:
-//            title = @"Course Schedule";
-//            break;
-//        case DownloadTypeProfessorSearch:
-//            title = @"Professors";
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//    self.navigationItem.title = title;
-
+    for(UIView *subView in _searchBar.subviews) {
+        if ([subView isKindOfClass:[UITextField class]]) {
+            UITextField *searchField = (UITextField *)subView;
+            searchField.font = [UIFont fontWithName:WP_FONT_CONTENT size:15.0f];
+        }
+    }
+    
+    // Overlay View - this will show up when keyboard is active.
+    int maxY = CGRectGetMaxY(_searchBar.frame);
+    UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    
+    _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, maxY, self.view.frame.size.width, self.view.frame.size.height-maxY)];
+    _overlayView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
+    _overlayView.hidden = YES;
+    [_overlayView addGestureRecognizer:singleTapGestureRecognizer];
+    [self.view addSubview:_overlayView];
+    
+    _tableView.tableHeaderView = _searchBar;
 }
 
+
 #pragma mark - Helper
+
 - (void)reloadTable {
     [_tableViewData removeAllObjects];
     [_tableViewData addObject:_courseArray];
@@ -66,37 +63,45 @@
     [_spinner stopAnimating];
 }
 
+- (void)dismissKeyboard {
+    [_searchBar resignFirstResponder];
+    _overlayView.hidden = YES;
+}
+
+
 #pragma mark - UISearchBar Delegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    [searchBar setShowsCancelButton:YES animated:YES];
-    
-    _tableView.allowsSelection = NO;
+//    [searchBar setShowsCancelButton:YES animated:YES];
+//    _tableView.allowsSelection = NO;
+    _overlayView.hidden = NO;
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSString *searchQuery = searchBar.text;
-    [_spinner startAnimating];
-    [searchBar setShowsCancelButton:YES animated:YES];
-    [searchBar resignFirstResponder];
+//    [searchBar setShowsCancelButton:YES animated:YES];
+//    [searchBar resignFirstResponder];
     
+    [_spinner startAnimating];
+    [self dismissKeyboard];
     
     //start search
+    NSString *searchQuery = searchBar.text;
     [[WPConnectionManager instance] search:_downloadType delegate:self query:searchQuery];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
-{
-	searchBar.showsCancelButton = NO;
-	[searchBar resignFirstResponder];
-}
+//- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+//{
+//	searchBar.showsCancelButton = NO;
+//	[searchBar resignFirstResponder];
+//}
 
 /*
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {
 }
  */
+
 
 #pragma mark - UITableView Delegate
 
@@ -123,9 +128,10 @@
     //clear table
     [_courseArray removeAllObjects];
     if([resultArray count] == 0) {
-        printf("NOT FOUND");
+        NSLog(@"NOT FOUND");
         WPSearch *notFound = [[WPSearch alloc] init];
         notFound.name = @"Not Found";
+        _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil]; // bug fix - app crashed when the first search was a failure
         [_courseArray addObject:notFound];
     }
     

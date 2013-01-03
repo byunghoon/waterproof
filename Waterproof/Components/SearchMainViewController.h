@@ -9,7 +9,9 @@
 #import "WPTableViewController.h"
 
 @interface SearchMainViewController : WPTableViewController <UISearchBarDelegate> {
-    UISearchBar *searchbar;
+    UISearchBar *_searchBar;
+    UIView *_overlayView;
+    
     NSMutableArray *_courseArray;
 }
 

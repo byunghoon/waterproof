@@ -10,6 +10,7 @@
 		105E692C168C062F0008FD1E /* SearchMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105E692B168C062F0008FD1E /* SearchMainViewController.m */; };
 		105E6933168CF98E0008FD1E /* SearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105E6932168CF98E0008FD1E /* SearchDetailViewController.m */; };
 		105E6935168CFBBF0008FD1E /* WPSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 105E6934168CFBBF0008FD1E /* WPSearch.m */; };
+		441E5AC5169642B50088AD71 /* table_searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 441E5AC4169642B50088AD71 /* table_searchbar.png */; };
 		4480210E168AB3360008A865 /* WPBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4480210D168AB3360008A865 /* WPBaseViewController.m */; };
 		44802111168AB4100008A865 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802110168AB4100008A865 /* SearchViewController.m */; };
 		44802114168AB4230008A865 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802113168AB4230008A865 /* PlacesViewController.m */; };
@@ -109,6 +110,7 @@
 		105E6931168CF98E0008FD1E /* SearchDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDetailViewController.h; sourceTree = "<group>"; };
 		105E6932168CF98E0008FD1E /* SearchDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDetailViewController.m; sourceTree = "<group>"; };
 		105E6934168CFBBF0008FD1E /* WPSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSearch.m; sourceTree = "<group>"; };
+		441E5AC4169642B50088AD71 /* table_searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = table_searchbar.png; path = ../../../../Graphic/waterproof/drop/table_searchbar.png; sourceTree = "<group>"; };
 		4480210A168AB0370008A865 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		4480210C168AB3360008A865 /* WPBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPBaseViewController.h; sourceTree = "<group>"; };
 		4480210D168AB3360008A865 /* WPBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPBaseViewController.m; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 		44BF35C916856F2C00EEAACD /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				441E5AC4169642B50088AD71 /* table_searchbar.png */,
 				44CCDE8316951FCB00E20942 /* Default-568h@2x.png */,
 				44CCDE8116951FC100E20942 /* Default@2x.png */,
 				44CCDE7F16951FB900E20942 /* Default.png */,
@@ -598,6 +601,7 @@
 				44CCDE8016951FB900E20942 /* Default.png in Resources */,
 				44CCDE8216951FC200E20942 /* Default@2x.png in Resources */,
 				44CCDE8416951FCB00E20942 /* Default-568h@2x.png in Resources */,
+				441E5AC5169642B50088AD71 /* table_searchbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

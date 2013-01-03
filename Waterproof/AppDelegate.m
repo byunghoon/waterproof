@@ -51,7 +51,6 @@
     
     UIImage *rightButtonImage = [[UIImage imageNamed:@"tabbar_selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 80, 0, 0)];
     [[UIBarButtonItem appearance] setBackgroundImage:rightButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0, rightButtonImage.size.height*2) forBarMetrics:UIBarMetricsDefault];
     
     
     // Tab Bar
@@ -68,6 +67,12 @@
                                                        [UIFont fontWithName:WP_FONT_TITLE size:11.0f], UITextAttributeFont,
                                                        WP_YELLOW, UITextAttributeTextColor,
                                                        nil] forState:UIControlStateSelected];
+    
+    
+    // Text Field and Search Bar
+    [[UITextField appearance] setBorderStyle:UITextBorderStyleRoundedRect];
+    [[UISearchBar appearance] setBackgroundImage:[UIImage imageNamed:@"table_searchbar"]];
+    
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
