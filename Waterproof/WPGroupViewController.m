@@ -13,6 +13,7 @@
 #define TAG_CELL_CONTAINER_VIEW 301
 #define TAG_CELL_TEXT_LABEL     302
 #define TAG_CELL_SPECIAL_VIEW   303
+#define TAG_CELL_CHEVRON        304
 #define FONT_DEFAULT_TEXT       [UIFont fontWithName:WP_FONT_CONTENT size:14.0f]
 #define FONT_SPECIAL_VIEW       [UIFont fontWithName:WP_FONT_CONTENT size:12.0f]
 
@@ -41,13 +42,15 @@
     
     [self.view addSubview:_tableView];
     
-    _tableViewHeaderString = [NSMutableArray array];
-    _tableViewData = [NSMutableArray array];
-    _specialDataFlag = [NSMutableArray array];
+    showChevron = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    _tableViewHeaderString = [NSMutableArray array];
+    _tableViewData = [NSMutableArray array];
+    _specialDataFlag = [NSMutableArray array];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE, MMMM dd, yyyy"];
@@ -70,6 +73,10 @@
                 [_tableViewData addObject:[NSArray arrayWithObject:data]];
             }
         }
+    }
+    
+    if ([_showChevronFlag count] > 0) {
+        showChevron = YES;
     }
     
     [_tableView reloadData];
@@ -109,7 +116,7 @@
     CGSize labelSize = [text sizeWithFont:(isSpecial ? FONT_SPECIAL_VIEW : FONT_DEFAULT_TEXT)
                         constrainedToSize:constraintSize
                             lineBreakMode:kLabelLineBreakWordWrap];
-    return labelSize.height + (2*WP_MARGIN_M) + (isSpecial ? WP_MARGIN_M : 0);
+    return labelSize.height + WP_MARGIN_S + (2*WP_MARGIN_M) + (isSpecial ? WP_MARGIN_M : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -117,11 +124,18 @@
     UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIView *cellView = [[UIView alloc] initWithFrame:CGRectMake(MARGIN_GROUP_CELL, WP_MARGIN_S, WIDTH_CELL, 0)];
         cellView.backgroundColor = [UIColor whiteColor];
         cellView.tag = TAG_CELL_CONTAINER_VIEW;
+        
+        if (showChevron) {
+            UIImageView *chevronImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_chevron"]];
+            chevronImageView.frame = CGRectMake(WIDTH_CELL-30, 0, 15.0, 15.0);
+            chevronImageView.tag = TAG_CELL_CHEVRON;
+            chevronImageView.hidden = YES;
+            [cellView addSubview:chevronImageView];
+        }
         
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(MARGIN_GROUP_CELL, WP_MARGIN_M, WIDTH_LABEL, 0)];
         textLabel.numberOfLines = 0;
@@ -171,10 +185,26 @@
         
         textLabel.frame = CGRectMake(MARGIN_GROUP_CELL, WP_MARGIN_M, WIDTH_LABEL, labelSize.height);
         cellView.frame = CGRectMake(MARGIN_GROUP_CELL, WP_MARGIN_S, WIDTH_CELL, labelSize.height+(2*WP_MARGIN_M));
-        cell.frame = CGRectMake(0, 0, cell.frame.size.width, labelSize.height+(2*WP_MARGIN_M));
+        cell.frame = CGRectMake(0, 0, cell.frame.size.width, labelSize.height+(2*WP_MARGIN_M)+WP_MARGIN_S);
+    }
+    
+    if ([[[_showChevronFlag objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] boolValue]) {
+        UIImageView *chevronImageView = (UIImageView *)[cell viewWithTag:TAG_CELL_CHEVRON];
+        chevronImageView.frame = CGRectMake(WIDTH_CELL-30, (cellView.frame.size.height-15.0)/2, 15.0, 15.0);
+        chevronImageView.hidden = NO;
+        
+        UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+        selectedBackgroundView.backgroundColor = [UIColor clearColor];
+        cell.selectedBackgroundView = selectedBackgroundView;
+    } else {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

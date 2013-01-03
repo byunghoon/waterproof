@@ -18,9 +18,12 @@
     NSMutableArray *_tableViewHeaderString;
     NSMutableArray *_tableViewData;
     NSMutableArray *_specialDataFlag;
+    
+    BOOL showChevron;
 }
 
 @property (nonatomic, strong) NSArray *rawHeaders;
 @property (nonatomic, strong) NSArray *rawData;
+@property (nonatomic, strong) NSMutableArray *showChevronFlag;
 
 @end

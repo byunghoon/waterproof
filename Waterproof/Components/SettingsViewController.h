@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Kokkiri. All rights reserved.
 //
 
-#import "WPBaseViewController.h"
+#import "WPGroupViewController.h"
 
-@interface SettingsViewController : WPBaseViewController
+@interface SettingsViewController : WPGroupViewController
 
 @end

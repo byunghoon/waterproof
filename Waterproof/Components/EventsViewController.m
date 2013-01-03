@@ -30,9 +30,9 @@
     
     activeConnections = 3;
     // Disabled for less server hit count
-    [[WPConnectionManager instance] download:DownloadTypeDailyEvents delegate:self];
-    [[WPConnectionManager instance] download:DownloadTypeCalendarEvents delegate:self];
-    [[WPConnectionManager instance] download:DownloadTypeUniversityHolidays delegate:self];
+//    [[WPConnectionManager instance] download:DownloadTypeDailyEvents delegate:self];
+//    [[WPConnectionManager instance] download:DownloadTypeCalendarEvents delegate:self];
+//    [[WPConnectionManager instance] download:DownloadTypeUniversityHolidays delegate:self];
 }
 
 
