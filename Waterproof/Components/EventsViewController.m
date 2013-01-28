@@ -30,9 +30,9 @@
     
     activeConnections = 3;
     // Disabled for less server hit count
-//    [[WPConnectionManager instance] download:DownloadTypeDailyEvents delegate:self];
-//    [[WPConnectionManager instance] download:DownloadTypeCalendarEvents delegate:self];
-//    [[WPConnectionManager instance] download:DownloadTypeUniversityHolidays delegate:self];
+    [[WPConnectionManager instance] download:DownloadTypeDailyEvents delegate:self];
+    [[WPConnectionManager instance] download:DownloadTypeCalendarEvents delegate:self];
+    [[WPConnectionManager instance] download:DownloadTypeUniversityHolidays delegate:self];
 }
 
 
@@ -107,6 +107,12 @@
             break;
         }
         case EventTypeHoliday: {
+            NSArray *headers = [NSArray arrayWithObjects:@"Name",@"Date", @"Description", nil];
+            NSArray *data = [NSArray arrayWithObjects:event.name, event.date, event.description, nil];
+            WPGroupViewController *groupViewController = [[WPGroupViewController alloc] init];
+            groupViewController.rawHeaders = headers;
+            groupViewController.rawData = data;
+            [self.navigationController pushViewController:groupViewController animated:YES];
             break;
         }
     }

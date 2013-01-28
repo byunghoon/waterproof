@@ -13,6 +13,9 @@
     UIView *_overlayView;
     
     NSMutableArray *_courseArray;
+    NSMutableArray *_backupArray;
+    BOOL searching;
+    BOOL letUserSelectRow;
 }
 
 @property (nonatomic) DownloadType downloadType;

@@ -8,6 +8,8 @@
 
 #import "SettingsViewController.h"
 #import "WPDatabaseManager.h"
+#import "WPTableViewController.h"
+#import "EditCourseViewController.h"
 
 @interface SettingsViewController ()
 
@@ -19,12 +21,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _courseStrings = [NSMutableArray array];
+    _chevronFlags = [NSMutableArray array];
     [self loadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    if (courseChanged == YES) {
+        [self loadData];
+        courseChanged = NO;
+    }
     [super viewDidAppear:animated];
-    [self loadData];
 }
 
 
@@ -35,26 +42,27 @@
     NSNumber *no = [NSNumber numberWithBool:NO];
     
     courses = [[[WPDatabaseManager instance] getCourseArrayForType:DataTypeCurrentCourses] copy];
-    
-    NSMutableArray *courseStrings = [NSMutableArray array];
-    NSMutableArray *chevronFlags = [NSMutableArray array];
+    // reset data
+    [_courseStrings removeAllObjects];
+    [_chevronFlags removeAllObjects];
     for (NSDictionary *course in courses) {
-        [courseStrings addObject:[NSString stringWithFormat:@"%@ %@", [course objectForKey:@"subject"], [course objectForKey:@"number"]]];
-        [chevronFlags addObject:no];
+        [_courseStrings addObject:[NSString stringWithFormat:@"%@ %@", [[course objectForKey:@"subject"] uppercaseString], [course objectForKey:@"number"]]];
+        [_chevronFlags addObject:no];
     }
     
-    [courseStrings addObject:@"Edit Courses"];
-    [chevronFlags addObject:yes];
+    [_courseStrings addObject:@"Edit Courses"];
+    [_chevronFlags addObject:yes];
     
     // Table Data
+    
     self.rawHeaders = [NSArray arrayWithObjects:@"My Courses", @"About", @"Version", @"Developers", nil];
     self.rawData = [NSArray arrayWithObjects:
-                    courseStrings,
+                    _courseStrings,
                     [NSArray arrayWithObjects:@"WaterProof", @"Kokkiri", nil],
                     [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey],
                     [NSArray arrayWithObjects:@"Byunghoon Yoon", @"Cheulsoon Baek", nil], nil];
     self.showChevronFlag = [NSArray arrayWithObjects:
-                            chevronFlags,
+                            _chevronFlags,
                             [NSArray arrayWithObjects:yes, yes, nil],
                             [NSArray arrayWithObject:no],
                             [NSArray arrayWithObjects:yes, yes, nil], nil];
@@ -68,7 +76,8 @@
     
     NSArray *header;
     NSArray *data;
-    if (indexPath.section == 1 && indexPath.row == [courses count]-1) {
+    if (indexPath.section == 0 && indexPath.row == [courses count]) {
+        
         /*
          Course entry view will be consist of two textviews (editable, keyboard pops up when tapped)
             and a done button (preferably as a rightBarButtonItem).
@@ -80,6 +89,10 @@
          
          Use WPDatabaseManager's getter and setter method. WPDatabaseManager is complete.
          */
+        courseChanged = YES;
+        EditCourseViewController *editCourseViewController = [[EditCourseViewController alloc] init];
+        [self.navigationController pushViewController:editCourseViewController animated:YES];
+        
     } else if (indexPath.section == 1 && indexPath.row == 0) {
         header = [NSArray arrayWithObjects:@"Project WaterProof", @"Disclaimer", @"Copyright", nil];
         data = [NSArray arrayWithObjects:@"Powered by the Waterloo API, WaterProof is an ongoing, ambitious project to stand as Waterloo's number one student guideline. The motive under the project is to \"let the knowns be known\"; our primary goal is to help the students fully utilize various kinds of information provided by the university.",

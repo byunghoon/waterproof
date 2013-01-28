@@ -10,6 +10,7 @@
 		105E692C168C062F0008FD1E /* SearchMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105E692B168C062F0008FD1E /* SearchMainViewController.m */; };
 		105E6933168CF98E0008FD1E /* SearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 105E6932168CF98E0008FD1E /* SearchDetailViewController.m */; };
 		105E6935168CFBBF0008FD1E /* WPSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 105E6934168CFBBF0008FD1E /* WPSearch.m */; };
+		10AACB3116AEFB040048DAD9 /* EditCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AACB3016AEFB040048DAD9 /* EditCourseViewController.m */; };
 		4480210E168AB3360008A865 /* WPBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4480210D168AB3360008A865 /* WPBaseViewController.m */; };
 		44802111168AB4100008A865 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802110168AB4100008A865 /* SearchViewController.m */; };
 		44802114168AB4230008A865 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44802113168AB4230008A865 /* PlacesViewController.m */; };
@@ -104,12 +105,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		105D9C5B16AE694E00690E13 /* Waterproof.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Waterproof.entitlements; sourceTree = "<group>"; };
 		105E692A168C062F0008FD1E /* SearchMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMainViewController.h; sourceTree = "<group>"; };
 		105E692B168C062F0008FD1E /* SearchMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMainViewController.m; sourceTree = "<group>"; };
 		105E692E168C1AF70008FD1E /* WPSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSearch.h; sourceTree = "<group>"; };
 		105E6931168CF98E0008FD1E /* SearchDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDetailViewController.h; sourceTree = "<group>"; };
 		105E6932168CF98E0008FD1E /* SearchDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDetailViewController.m; sourceTree = "<group>"; };
 		105E6934168CFBBF0008FD1E /* WPSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSearch.m; sourceTree = "<group>"; };
+		10AACB2F16AEFB040048DAD9 /* EditCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCourseViewController.h; sourceTree = "<group>"; };
+		10AACB3016AEFB040048DAD9 /* EditCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCourseViewController.m; sourceTree = "<group>"; };
 		4480210A168AB0370008A865 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		4480210C168AB3360008A865 /* WPBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPBaseViewController.h; sourceTree = "<group>"; };
 		4480210D168AB3360008A865 /* WPBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPBaseViewController.m; sourceTree = "<group>"; };
@@ -300,6 +304,8 @@
 			children = (
 				44802115168AB4330008A865 /* SettingsViewController.h */,
 				44802116168AB4330008A865 /* SettingsViewController.m */,
+				10AACB2F16AEFB040048DAD9 /* EditCourseViewController.h */,
+				10AACB3016AEFB040048DAD9 /* EditCourseViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -337,6 +343,7 @@
 		44B229821683B53100E853E5 /* Waterproof */ = {
 			isa = PBXGroup;
 			children = (
+				105D9C5B16AE694E00690E13 /* Waterproof.entitlements */,
 				44B229AD1683CDDC00E853E5 /* External Sources */,
 				44B229831683B53100E853E5 /* Supporting Files */,
 				44BF35C916856F2C00EEAACD /* Assets */,
@@ -640,6 +647,7 @@
 				105E6935168CFBBF0008FD1E /* WPSearch.m in Sources */,
 				44CCDE5B1694D68200E20942 /* WPGroupViewController.m in Sources */,
 				44CCDE8716953EB400E20942 /* WPDatabaseManager.m in Sources */,
+				10AACB3116AEFB040048DAD9 /* EditCourseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,10 +719,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CheulSoon Baek (2B73AFT6Q2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Waterproof/Waterproof-Prefix.pch";
 				INFOPLIST_FILE = "Waterproof/Waterproof-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C6C729-BA00-491D-AA27-82511706F8F7";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -724,10 +737,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CheulSoon Baek (2B73AFT6Q2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Waterproof/Waterproof-Prefix.pch";
 				INFOPLIST_FILE = "Waterproof/Waterproof-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C6C729-BA00-491D-AA27-82511706F8F7";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

@@ -11,8 +11,17 @@
 
 @interface WPSearch : NSObject
 
+typedef enum {
+    courseSearch,
+    profSearch,
+    examSearch,
+    scheduleSearch
+} searchType;
+
 // universal
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *name2;
+@property (nonatomic) searchType type;
 
 // course search
 @property (nonatomic, strong) NSString *deptAcronym;

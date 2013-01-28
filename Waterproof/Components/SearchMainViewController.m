@@ -10,6 +10,7 @@
 #import "WPConnectionManager.h"
 #import "WPSearch.h"
 #import "Constants.h"
+#import "SearchDetailViewController.h"
 
 @interface SearchMainViewController ()
 
@@ -23,6 +24,7 @@
     [super viewDidLoad];
 	
     _courseArray = [NSMutableArray array];
+    _backupArray = [NSMutableArray array];
     
     // stop spinner. (turn on when search started)
     [_spinner stopAnimating];
@@ -39,6 +41,12 @@
         }
     }
     
+    if(_downloadType == DownloadTypeExamSchedule) {
+        [_spinner startAnimating];
+        [[WPConnectionManager instance] download:DownloadTypeExamSchedule delegate:self];
+    }
+    
+    
     // Overlay View - this will show up when keyboard is active.
     int maxY = CGRectGetMaxY(_searchBar.frame);
     UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -48,6 +56,8 @@
     _overlayView.hidden = YES;
     [_overlayView addGestureRecognizer:singleTapGestureRecognizer];
     [self.view addSubview:_overlayView];
+    searching = NO;
+    letUserSelectRow = YES;
     
     _tableView.tableHeaderView = _searchBar;
 }
@@ -73,34 +83,71 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-//    [searchBar setShowsCancelButton:YES animated:YES];
-//    _tableView.allowsSelection = NO;
     _overlayView.hidden = NO;
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-//    [searchBar setShowsCancelButton:YES animated:YES];
-//    [searchBar resignFirstResponder];
+    [self dismissKeyboard];
+
+    if(_downloadType == DownloadTypeExamSchedule) {
+        return;
+    }
+    if ((_downloadType == DownloadTypeProfessorSearch || _downloadType == DownloadTypeCourseSchedule) && searchBar.text.length == 1) {
+        [_courseArray removeAllObjects];
+        [_backupArray removeAllObjects];
+        NSLog(@"NOT FOUND");
+        WPSearch *notFound = [[WPSearch alloc] init];
+        notFound.name = @"Not Found";
+        _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil]; // bug fix - app crashed when the first search was a failure
+        [_courseArray addObject:notFound];
+        [_backupArray addObject:notFound];
+        [self reloadTable];
+        return;
+    }
+    
+    _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
     
     [_spinner startAnimating];
-    [self dismissKeyboard];
     
     //start search
     NSString *searchQuery = searchBar.text;
     [[WPConnectionManager instance] search:_downloadType delegate:self query:searchQuery];
 }
 
-//- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
-//{
-//	searchBar.showsCancelButton = NO;
-//	[searchBar resignFirstResponder];
-//}
-
-/*
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {
+    // exam schedule only
+    if(_downloadType == DownloadTypeExamSchedule) {
+        
+        [_courseArray removeAllObjects];
+        [_courseArray addObjectsFromArray:_backupArray];
+        _tableViewHeaderString = [NSArray arrayWithObjects:searchTerm, nil];
+        
+        if (searchTerm.length > 0) {
+        
+            // course search
+            for(int i = 0; i < _courseArray.count; i++) {
+                WPSearch *course = [_courseArray objectAtIndex:i];
+                // [[string lowercaseString] rangeOfString:[substring lowercaseString]]
+                NSRange rangeString = [course.name rangeOfString:searchTerm options:NSCaseInsensitiveSearch];
+                if (rangeString.location == NSNotFound) {
+                    [_courseArray removeObjectAtIndex:i];
+                    i--;
+                }
+            }
+            
+            // course not found
+            if(_courseArray.count == 0) {
+                WPSearch *notFound = [[WPSearch alloc] init];
+                notFound.name = @"Not Found";
+                [_courseArray addObject:notFound];
+            }
+        }
+        
+        [self reloadTable];
+    }
 }
- */
+
 
 
 #pragma mark - UITableView Delegate
@@ -117,35 +164,55 @@
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString*)title atIndex:(NSInteger)index {
     return index;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    WPSearch *search = [[_tableViewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    
+    SearchDetailViewController *searchDetailViewController = [[SearchDetailViewController alloc] init];
+    
+    searchDetailViewController.search = search;
+    [self.navigationController pushViewController:searchDetailViewController animated:YES];
+    
+}
 
 
 #pragma mark - DownloadDelegate
 
 - (void)downloadSucceeded:(DownloadType)downloadType data:(id)data {
+    
     NSArray *resultArray = [[[data objectForKey:@"response"] objectForKey:@"data"] objectForKey:@"result"];
         
         
     //clear table
     [_courseArray removeAllObjects];
+    [_backupArray removeAllObjects];
     if([resultArray count] == 0) {
         NSLog(@"NOT FOUND");
         WPSearch *notFound = [[WPSearch alloc] init];
         notFound.name = @"Not Found";
         _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil]; // bug fix - app crashed when the first search was a failure
         [_courseArray addObject:notFound];
+        [_backupArray addObject:notFound];
     }
     
     if ([resultArray isKindOfClass:[NSDictionary class]]) {
         _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
         WPSearch *search = [WPSearch searchWithData:resultArray type:downloadType];
         [_courseArray addObject:search];
+        [_backupArray addObject:search];
     } else {
     
         for(NSDictionary *result in resultArray) {
             _tableViewHeaderString = [NSArray arrayWithObjects:@"Result", nil];
             WPSearch *search = [WPSearch searchWithData:result type:downloadType];
             [_courseArray addObject:search];
+            [_backupArray addObject:search];
         }
+    }
+    if(_downloadType == DownloadTypeExamSchedule) {
+        _tableViewHeaderString = [NSArray arrayWithObjects:@"Courses", nil];
+        
     }
     
     

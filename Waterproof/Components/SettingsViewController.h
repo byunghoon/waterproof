@@ -10,6 +10,9 @@
 
 @interface SettingsViewController : WPGroupViewController {
     NSMutableArray *courses;
+    BOOL courseChanged;
 }
+@property (strong, nonatomic) NSMutableArray *courseStrings;
+@property (strong, nonatomic) NSMutableArray *chevronFlags;
 
 @end

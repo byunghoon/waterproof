@@ -9,6 +9,8 @@
 #import "WPConnectionManager.h"
 #import "AFJSONRequestOperation.h"
 
+// cheulsoon - 5fa36b8f4a15258da2cc06b241f116ac
+// byunghoon - 13d92fbc5c34ebeeea1daca01bac2f8e
 static NSString *BASE_URL = @"http://api.uwaterloo.ca/public/v1/?key=13d92fbc5c34ebeeea1daca01bac2f8e&service=";
 
 @implementation WPConnectionManager
@@ -54,6 +56,10 @@ static NSString *BASE_URL = @"http://api.uwaterloo.ca/public/v1/?key=13d92fbc5c3
             urlString = [BASE_URL stringByAppendingString:@"WatcardVendors"];
             break;
         }
+        case DownloadTypeExamSchedule: {
+            urlString = [BASE_URL stringByAppendingString:@"ExamSchedule&q="];
+            break;
+        }
         default:
             break;
     }
@@ -74,6 +80,7 @@ static NSString *BASE_URL = @"http://api.uwaterloo.ca/public/v1/?key=13d92fbc5c3
 // Search Manager
 - (void)search:(DownloadType)downloadType delegate:(id<DownloadDelegate>)delegate query:(NSString*)query {
     NSString *urlString;
+    query = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     switch (downloadType) {
         case DownloadTypeCourseSearch: {
             urlString = [[BASE_URL stringByAppendingString:@"CourseSearch&q="] stringByAppendingString:query];
@@ -85,10 +92,6 @@ static NSString *BASE_URL = @"http://api.uwaterloo.ca/public/v1/?key=13d92fbc5c3
         }
         case DownloadTypeCourseSchedule: {
             urlString = [[BASE_URL stringByAppendingString:@"Schedule&q="] stringByAppendingString:query];
-            break;
-        }
-        case DownloadTypeExamSchedule: {
-            urlString = [[BASE_URL stringByAppendingString:@"ExamSchedule&q="] stringByAppendingString:query];
             break;
         }
         default:

@@ -6,8 +6,12 @@
 //  Copyright (c) 2012년 Kokkiri. All rights reserved.
 //
 
-#import "WPBaseViewController.h"
+#import "WPGroupViewController.h"
+#import "WPSearch.h"
 
-@interface SearchDetailViewController : WPBaseViewController
+@interface SearchDetailViewController : WPGroupViewController
+
+@property (nonatomic, strong) WPSearch *search;
+@property (nonatomic, retain) UIWebView *webView;
 
 @end

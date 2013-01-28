@@ -126,8 +126,18 @@
             NSString *type = [self textFromParkingType:place.parkingType andPaymentType:place.paymentType];
             NSArray *costs = place.costInfo2 ? [NSArray arrayWithObjects:place.costInfo1, place.costInfo2, nil] : [NSArray arrayWithObject:place.costInfo1];
             
-            NSArray *headers = [NSArray arrayWithObjects:@"Name", @"Type", @"Costs", nil];
-            NSArray *data = [NSArray arrayWithObjects:place.name, type, costs, nil];
+            NSArray *headers, *data;
+            
+            if (costs) {
+                headers = [NSArray arrayWithObjects:@"Name", @"Type", @"Costs", nil];
+                data = [NSArray arrayWithObjects:place.name, type, costs, nil];
+            } else {
+                headers = [NSArray arrayWithObjects:@"Name", @"Type", nil];
+                data = [NSArray arrayWithObjects:place.name, type, nil];
+            }
+//            
+//            NSArray *headers = [NSArray arrayWithObjects:@"Name", @"Type", @"Costs", nil];
+//            NSArray *data = [NSArray arrayWithObjects:place.name, type, costs, nil];
             
             PlaceDetailViewController *placeDetailViewController = [[PlaceDetailViewController alloc] init];
             placeDetailViewController.place = place;

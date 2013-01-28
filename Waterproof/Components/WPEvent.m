@@ -16,9 +16,9 @@
         case DownloadTypeDailyEvents: {
             event.eventID = [data objectForKey:@"ID"];
             event.eventType = EventTypeDaily;
-            event.name = [data objectForKey:@"Name"];
+            event.name = [[data objectForKey:@"Name"] stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
             event.date = [NSDate date];
-            event.description = [data objectForKey:@"Description"];
+            event.description = [[data objectForKey:@"Description"] stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
             
             id links = [[data objectForKey:@"Links"] objectForKey:@"result"];
             if ([links isKindOfClass:[NSString class]] && ![links isEqualToString:@""]) {
@@ -34,8 +34,8 @@
         case DownloadTypeCalendarEvents: {
             event.eventID = [data objectForKey:@"ID"];
             event.eventType = EventTypeCalendar;
-            event.name = [data objectForKey:@"Title"];
-            event.description = [data objectForKey:@"Description"];
+            event.name = [[data objectForKey:@"Title"] stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+            event.description = [[data objectForKey:@"Description"] stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
             event.venue = [data objectForKey:@"Where"];
             event.host = [data objectForKey:@"Host"];
             event.links = [NSArray arrayWithObject:[data objectForKey:@"Link"]];
@@ -59,8 +59,8 @@
         case DownloadTypeUniversityHolidays: {
             event.eventID = [data objectForKey:@"ID"];
             event.eventType = EventTypeHoliday;
-            event.name = [data objectForKey:@"Name"];
-            event.description = [data objectForKey:@"Description"];
+            event.name = [[data objectForKey:@"Name"] stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+            event.description = [[data objectForKey:@"Description"] stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
             
             // Get Start Date
             NSString *holiday = [NSString stringWithFormat:@"%@ %@", [data objectForKey:@"Day"], [data objectForKey:@"Year"]];
